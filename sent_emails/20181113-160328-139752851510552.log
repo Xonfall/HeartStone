@@ -1,0 +1,26 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?q?R=C3=A9initialisation_du_mot_de_passe_sur_localhost=3A8000?=
+From: webmaster@localhost
+To: nouve.yann@gmail.com
+Date: Tue, 13 Nov 2018 16:03:28 -0000
+Message-ID: <154212500855.232.4712448229624461185@f06f5fda68a5>
+
+
+Vous recevez ce message en réponse à votre demande de réinitialisation du mot de passe de votre compte sur localhost:8000.
+
+Veuillez vous rendre sur cette page et choisir un nouveau mot de passe :
+
+http://localhost:8000/user/reset/Mw/519-26b29932ba29b2a7061f/
+
+Votre nom d'utilisateur, en cas d'oubli : Chateuxv2
+
+Merci d'utiliser notre site !
+
+L'équipe localhost:8000
+
+
+
+-------------------------------------------------------------------------------
