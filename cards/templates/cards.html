@@ -3,7 +3,6 @@ CARTES
 <div class="cards_container">
     <div class="cards" style="display: inline-block">
         {% if cards != null %}
-            {{ cards }}
             {% for card in cards %}
                 <p>{{ card.name }}</p>
                 <img src="{{ card.img }}" alt="">
