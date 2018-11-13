@@ -13,11 +13,6 @@ class CardForm(ModelForm):
 
     def example(request):
         cards = Cards()
-        db = Card()
-
         all_cards = cards.get_all_cards()
-
-        if all_cards.img is not None:
-            db.save(name=)
 
         return render(request, 'cards.html', {'cards': all_cards})
