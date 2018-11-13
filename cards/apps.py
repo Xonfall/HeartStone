@@ -14,9 +14,8 @@ class Cards:
     headers = {'X-Mashape-Key': 'oI5kQBBnbFmsh1HykxSp39sqDBJap16s5ImjsnGbHoDtbprkGM'}
 
     def get_all_cards(self):
-        all_cards = requests.get(self.api_url, headers=self.headers).json()
-
-        return all_cards
+        all_cards = requests.get(self.api_url, headers=self.headers).text
+        return json.loads(all_cards)
 
     def json_to_object(self, el):
         # Parse JSON into an object with attributes corresponding to dict keys.
