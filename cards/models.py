@@ -13,4 +13,4 @@ class Card(models.Model):
     description = models.CharField(max_length=255)
     attack = models.IntegerField(validators=[MinValueValidator(10)], default=0)
     img = models.CharField(max_length=255, null=True)
-    type_card_id = models.ForeignKey(Type_Card, on_delete=models.CASCADE)
+    type_card = models.ForeignKey(Type_Card, on_delete=models.CASCADE)

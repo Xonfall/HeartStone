@@ -8,7 +8,7 @@ from cards.models import Type_Card
 
 class CardForm(ModelForm):
 
-    # @login_required
+    #@login_required
     def index(request):
         return render(request, 'index.html')
 
