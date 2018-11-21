@@ -1,12 +1,7 @@
-CARTES
-
 <div class="cards_container">
-    <div class="cards" style="display: inline-block">
-        {% if cards != null %}
-            {% for card in cards %}
-                <p>{{ card.name }}</p>
-                <img src="{{ card.img }}" alt="">
-            {% endfor %}
+    <div class="cards" style="text-align: center">
+        {% if lines != null %}
+            <h1>Nombre de cartes enregistré : {{ lines }}</h1>
         {% endif %}
     </div>
 </div>

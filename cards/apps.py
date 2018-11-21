@@ -20,7 +20,7 @@ class Cards:
 
 
 class CardValidator:
-    param_required = ('name', 'health', 'attack', 'cost', 'text', 'img')
+    param_required = ('name', 'health', 'attack', 'cost', 'text', 'img', 'rarity')
     rarity_array = {1: 'Free', 2: 'Common', 3: 'Rare', 4: 'Epic', 5: 'Legendary'}
 
     def api_param_validator(self, card):

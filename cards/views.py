@@ -19,11 +19,12 @@ class CardForm(ModelForm):
         all_cards = cards_api.get_all_cards()
 
         # Enregistre les données Type_card en BDD
-        card_validator.setup_type_cards()
+        if Type_Card.objects.all().count() == 0:
+            card_validator.setup_type_cards()
+
         for cat in all_cards:
             for card in all_cards[cat]:
                 if card_validator.api_param_validator(card) is True:
-                    print('IN : ',card)
                     type_card_model = Type_Card(card_validator.check_type_card(card.get('rarity')))
                     card_model = Card.objects.create(
                         name=card['name'],
@@ -35,8 +36,8 @@ class CardForm(ModelForm):
                         type_card=type_card_model
                     )
                     card_model.save()
-                print('OUT :', card.get('cardSet'))
-        return render(request, 'cards.html', {'cards': all_cards})
+
+        return render(request, 'cards.html', {'lines': Card.objects.all().count()})
 
 
 def cards(request, id_card):
