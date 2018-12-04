@@ -2,7 +2,7 @@ from django.apps import AppConfig
 import requests
 import json
 
-from cards.models import Type_Card
+from cards.models import Rarity_cards
 
 
 class CardsConfig(AppConfig):
@@ -20,7 +20,7 @@ class Cards:
 
 
 class CardValidator:
-    param_required = ('name', 'health', 'attack', 'cost', 'text', 'img', 'rarity')
+    param_required = ('name', 'health', 'attack', 'cost', 'text', 'img', 'rarity', 'race')
     rarity_array = {1: 'Free', 2: 'Common', 3: 'Rare', 4: 'Epic', 5: 'Legendary'}
 
     def api_param_validator(self, card):
@@ -42,17 +42,18 @@ class CardValidator:
             else:
                 return False
 
-    def setup_type_cards(self):
-        for key, value in self.rarity_array.items():
-            s = Type_Card(key, name=value)
-            s.save()
+    def setup_type_cards(self, database_object):
+        for key, value in database_object:
+            print(key, "    ", value)
+            #s = Rarity_card(key, name=value)
+            #s.save()
 
-    def check_type_card(self, rarity_card):
+    def check_type_card(self, card):
         valid = False
 
         while not valid:
             for key, value in self.rarity_array.items():
-                if rarity_card == value:
+                if card == value:
                     return key
                 else:
                     valid = False
