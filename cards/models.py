@@ -38,4 +38,4 @@ class Cards(models.Model):
 class User_cards(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    cards = models.ManyToManyField(Cards)
+    card = models.ManyToManyField(Cards)
