@@ -2,7 +2,7 @@ from django.apps import AppConfig
 import requests
 import json
 
-from cards.models import Rarity_card
+from cards.models import Rarity_cards
 
 
 class CardsConfig(AppConfig):
