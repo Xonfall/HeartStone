@@ -4,7 +4,8 @@ from django.forms import ModelForm
 from cards.apps import Cards
 from cards.apps import CardValidator
 from cards.models import Card
-from cards.models import Type_Card
+from cards.models import Rarity_card
+from cards.models import Race_card
 
 
 class CardForm(ModelForm):
@@ -18,14 +19,18 @@ class CardForm(ModelForm):
         card_validator = CardValidator()
         all_cards = cards_api.get_all_cards()
 
-        # Enregistre les données Type_card en BDD
-        if Type_Card.objects.all().count() == 0:
-            card_validator.setup_type_cards()
-
         for cat in all_cards:
             for card in all_cards[cat]:
                 if card_validator.api_param_validator(card) is True:
-                    type_card_model = Type_Card(card_validator.check_type_card(card.get('rarity')))
+                    #rarity_card_model = Rarity_card(card_validator.check_type_card(card.get('rarity')))
+                    #race_card_model = Race_card(card_validator.check_type_card(card.get('race')))
+                    card_rarity_all = Rarity_card.objects.all()
+                    card_race_all = Race_card.objects.all()
+
+                    if card_rarity_all.count() == 0 and card_race_all.count() == 0:
+                        for key, value in card_rarity_all:
+                            print(key, value)
+
                     card_model = Card.objects.create(
                         name=card['name'],
                         description=card['text'],
@@ -33,7 +38,8 @@ class CardForm(ModelForm):
                         health=card['health'],
                         cost=card['cost'],
                         img=card['img'],
-                        type_card=type_card_model
+                     #   rarity_card=rarity_card_model,
+                      #  race_card=race_card_model
                     )
                     card_model.save()
 
