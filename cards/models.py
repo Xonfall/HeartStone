@@ -3,14 +3,15 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth.models import User
 from heartstone.settings import AUTH_USER_MODEL
 
-class Rarity_cards(models.Model):
-    id = models.AutoField(primary_key=True)
+# Create your models here.
+
+class Rarity_card(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-
+      
 class Race_cards(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
@@ -33,9 +34,12 @@ class Cards(models.Model):
     def __str__(self):
         return self.name
 
+# Les champs : id, user (oneToMany), cards (ManyToMany)
+# class User_cards(models.Model):
 
 # Les champs : id, user (oneToMany), cards (ManyToMany)
-class User_cards(models.Model):
-    id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
-    card = models.ManyToManyField(Cards)
+#class User_cards(models.Model):
+ #   id = models.AutoField(primary_key=True)
+  #  user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+   # card = models.ManyToManyField(Cards)
+
