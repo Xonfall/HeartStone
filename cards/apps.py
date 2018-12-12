@@ -1,4 +1,8 @@
 from django.apps import AppConfig
+from cards.models import Race_card
+from cards.models import Card
+from cards.models import Rarity_card
+
 import requests
 import json
 
@@ -23,7 +27,7 @@ class CardValidator:
     param_required = ('name', 'health', 'attack', 'cost', 'text', 'img', 'rarity', 'race')
     rarity_array = {1: 'Free', 2: 'Common', 3: 'Rare', 4: 'Epic', 5: 'Legendary'}
 
-    def api_param_validator(self, card):
+    def check_params(self, card):
         valid = []
         lenght_params = len(self.param_required)
         count = 0
@@ -42,11 +46,19 @@ class CardValidator:
             else:
                 return False
 
-    def setup_type_cards(self, database_object):
-        for key, value in database_object:
-            print(key, "    ", value)
-            #s = Rarity_card(key, name=value)
-            #s.save()
+    def init_rarity_card_database(self):
+        for key, value in self.rarity_array.items():
+            s = Rarity_card(key, name=value)
+            s.save()
+
+    def init_race_card_database(self, race_name):
+        get_race = Race_card.objects.all().filter(name=race_name)
+
+        if get_race is not None:
+            return True
+        else:
+            race = Race_card(name=race_name)
+            race.save()
 
     def check_type_card(self, card):
         valid = False

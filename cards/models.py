@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 # Create your models here.
 
 class Rarity_card(models.Model):
@@ -29,5 +30,5 @@ class Card(models.Model):
 
     def __str__(self):
         return self.name
-#Les champs : id, user (oneToMany), cards (ManyToMany)
-#class User_cards(models.Model):
+# Les champs : id, user (oneToMany), cards (ManyToMany)
+# class User_cards(models.Model):
