@@ -1,5 +1,7 @@
+from django.core.validators import MinValueValidator
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
+
+from user.models import User
 
 
 # Create your models here.
@@ -30,5 +32,10 @@ class Card(models.Model):
 
     def __str__(self):
         return self.name
+
+
 # Les champs : id, user (oneToMany), cards (ManyToMany)
-# class User_cards(models.Model):
+class User_cards(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    card = models.ManyToManyField(Card)

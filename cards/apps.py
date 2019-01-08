@@ -1,11 +1,9 @@
-from django.apps import AppConfig
-from cards.models import Race_card
-from cards.models import Card
-from cards.models import Rarity_card
-
-import requests
 import json
 
+import requests
+from django.apps import AppConfig
+
+from cards.models import Race_card
 from cards.models import Rarity_card
 
 

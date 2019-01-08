@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from deck.models import Deck
-from deck.models import Card
 from django.forms import ModelForm
-from django import forms
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 class DeckForm(ModelForm):
