@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cards.models import Card
+from cards.models import Cards
 
 
 # Register your models here.
@@ -9,4 +9,4 @@ class CardsAdmin(admin.ModelAdmin):
 
 
 # Register the admin class with the associated model
-admin.site.register(Card, CardsAdmin)
+admin.site.register(Cards, CardsAdmin)
