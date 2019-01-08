@@ -1,11 +1,11 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import ModelForm
-from cards.apps import Cards
+from django.shortcuts import render, redirect
+
 from cards.apps import CardValidator
-from cards.models import Cards
+from cards.apps import Cards
+from cards.models import Card
+from cards.models import Race_card
 from cards.models import Rarity_cards
-from cards.models import Race_cards
 
 
 class CardForm(ModelForm):
@@ -41,7 +41,7 @@ class CardForm(ModelForm):
                             race_card_model = Race_card(name=card.get('race'))
                             race_card_model.save()
 
-                    card_model = Cards.objects.create(
+                    card_model = Card.objects.create(
                         name=card['name'],
                         description=card['text'],
                         attack=card['attack'],
@@ -53,12 +53,12 @@ class CardForm(ModelForm):
                     )
                     card_model.save()
 
-        return render(request, 'cards.html', {'lines': Cards.objects.all().count()})
+        return render(request, 'cards.html', {'lines': Card.objects.all().count()})
 
 
 def cards(request, id_card):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        card = Cards.objects.get(id=id_card)
+        card = Card.objects.get(id=id_card)
         return render(request, 'cards.html', {'card': card})
