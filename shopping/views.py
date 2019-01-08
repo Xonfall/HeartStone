@@ -23,9 +23,12 @@ def buy_cards(request):
             choice = request.POST['choice']
 
             if choice == 'choice1':
+                price = 50
                 cards = Card.objects.all().get(id=random.randint(1, 499))
                 print(cards)
             elif choice == 'choice2':
+                price = 150
                 print()
             elif choice == 'choice3':
+                price = 300
                 print()
