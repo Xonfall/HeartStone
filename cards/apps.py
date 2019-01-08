@@ -1,7 +1,7 @@
 from django.apps import AppConfig
-from cards.models import Race_card
-from cards.models import Card
-from cards.models import Rarity_card
+from cards.models import Race_cards
+from cards.models import Cards
+from cards.models import Rarity_cards
 
 import requests
 import json

@@ -1,24 +1,43 @@
+{% load static %}
 <!-- templates/base.html -->
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 
-<ul class="sidebar-nav">
-   {% if user.is_authenticated %}
-     <li>User: {{ user.get_username }}</li>
-     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-   {% else %}
-     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-   {% endif %}
-  </ul>
 
 <body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
+        <section class="cover">
+            
+                <nav>
+                  <span class="logo">
+                    Hearthstone Max.
+                </span>
+                  <ul>
+                    <li>Jouer</li>
+                    <li>Mon deck</a> </li>
+                    <li>Boutique</li>
+                    <li>Shopping</li>
+                    <li>Forum</li>
+                    <li></li>
+
+                    {% if user.is_authenticated %}
+                    <li>User: {{ user.get_username }}</li>
+                    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                  {% else %}
+                    <li><a href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                  {% endif %}
+                    <li class="ghost-btn" ><a href="{% url 'register'%}?next={{request.path}}" >Sign up</a> </li>
+                  </ul>
+                </nav>
+                <div class="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+        </section>
+ 
 </body>
 </html>

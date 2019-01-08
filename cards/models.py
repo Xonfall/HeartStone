@@ -5,7 +5,7 @@ from heartstone.settings import AUTH_USER_MODEL
 
 # Create your models here.
 
-class Rarity_card(models.Model):
+class Rarity_cards(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):

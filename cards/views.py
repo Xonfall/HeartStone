@@ -25,7 +25,7 @@ class CardForm(ModelForm):
                 if card_validator.check_params(card):
                     rarity_card_model = Rarity_card(card_validator.check_type_card(card.get('rarity')))
                     race_cards = Race_card.objects.all()
-                    
+
                     if race_cards.count() == 0:
                         race_card_model = Race_card(name=card.get('race'))
                         race_card_model.save()
