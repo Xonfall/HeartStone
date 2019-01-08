@@ -15,22 +15,28 @@
                 <nav>
                   <span class="logo">
                     Hearthstone Max.
-                </span>
+                  </span>
                   <ul>
-                    <li>Jouer</li>
-                    <li>Mon deck</a> </li>
-                    <li>Boutique</li>
-                    <li>Shopping</li>
-                    <li>Forum</li>
-                    <li></li>
+                    {% if user.is_authenticated %}
+                      <li>Jouer</li>
+                      <li> Mon deck</a> </li>
+                      <li>Boutique</li>
+                      <li>Shopping</li>
+                      <li>Mon compte</li>
+                      {% else %}
+                      <li>Accueil</li>
+                    {% endif %}
+
+                      <li>Forum</li>
+                      <li>Contact</li>
 
                     {% if user.is_authenticated %}
-                    <li>User: {{ user.get_username }}</li>
-                    <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-                  {% else %}
-                    <li><a href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
-                  {% endif %}
-                    <li class="ghost-btn" ><a href="{% url 'register'%}?next={{request.path}}" >Sign up</a> </li>
+                      <li>User: {{ user.get_username }}</li>
+                      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                    {% else %}
+                      <li><a href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                    {% endif %}
+                      <li class="ghost-btn" ><a href="{% url 'register'%}?next={{request.path}}" >Sign up</a> </li>
                   </ul>
                 </nav>
                 <div class="content">
