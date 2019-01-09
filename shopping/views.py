@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from cards.models import Card
-# from cards.models import User_cards
 from user.models import User
 
 
@@ -20,6 +19,7 @@ def buy_cards(request):
         user_money = request.user.money
         username = request.user
         user_id = request.user.id
+        cards = []
 
         if request.POST['choice'] is not None:
             choice = request.POST['choice']
@@ -27,27 +27,48 @@ def buy_cards(request):
             if choice == 'choice1':
                 price = 50
                 user_money = user_money - price
-                if user_money >= 0:
-                    User(id=user_id, money=user_money).save()
-                    cards = [
-                        Card.objects.get(id=random.randint(1, 499)),
-                        Card.objects.get(id=random.randint(1, 499)),
-                        Card.objects.get(id=random.randint(1, 499))
-                    ]
-                    # user_card_registery = User_cards.objects.create(
-                    #     user=User(id=user_id)
-                    #  )
-                    #  user_card_registery.save()
 
-                    #   for card in cards:
-                    #  user_card_registery.card.add(card)
+                if user_money >= 0:
+                    User.objects.filter(id=user_id).update(money=user_money)
+
+                    for i in range(0, 4):
+                        cards.append(Card.objects.get(id=random.randint(1, 499)))
+
+                    for card in cards:
+                        Card(id=card.id).users.add(User(id=user_id))
 
                     return render(request, 'shopping/index.html')
                 else:
                     return render(request, 'shopping/index.html')
             elif choice == 'choice2':
                 price = 150
-                print()
+                user_money = user_money - price
+
+                if user_money >= 0:
+                    User.objects.filter(id=user_id).update(money=user_money)
+
+                    for i in range(0, 6):
+                        cards.append(Card.objects.get(id=random.randint(1, 499)))
+
+                    for card in cards:
+                        Card(id=card.id).users.add(User(id=user_id))
+
+                    return render(request, 'shopping/index.html')
+                else:
+                    return render(request, 'shopping/index.html')
             elif choice == 'choice3':
                 price = 300
-                print()
+                user_money = user_money - price
+
+            if user_money >= 0:
+                User.objects.filter(id=user_id).update(money=user_money)
+
+                for i in range(0, 12):
+                    cards.append(Card.objects.get(id=random.randint(1, 499)))
+
+                for card in cards:
+                    Card(id=card.id).users.add(User(id=user_id))
+
+                return render(request, 'shopping/index.html')
+            else:
+                return render(request, 'shopping/index.html')
