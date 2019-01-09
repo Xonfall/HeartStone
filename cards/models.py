@@ -29,7 +29,7 @@ class Card(models.Model):
     img = models.CharField(max_length=255, null=True)
     rarity_card = models.ForeignKey(Rarity_card, on_delete=models.CASCADE)
     race_card = models.ForeignKey(Race_card, on_delete=models.CASCADE)
-    user = models.ManyToManyField(User)
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return self.name

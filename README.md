@@ -1,1 +1,3 @@
-# HeartStone-Django
+# HeartStone
+
+> Made with Django framework
