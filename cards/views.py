@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
 from django.shortcuts import render, redirect
 
@@ -6,6 +7,7 @@ from cards.apps import Cards
 from cards.models import Card
 from cards.models import Race_card
 from cards.models import Rarity_card
+from user.models import User
 
 
 class CardForm(ModelForm):
@@ -62,3 +64,14 @@ def cards(request, id_card):
     else:
         card = Card.objects.get(id=id_card)
         return render(request, 'cards.html', {'card': card})
+
+
+@login_required
+def my_cards(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    else:
+        u1 = request.user
+        get_cards = u1.card_set.all()
+
+    return render(request, 'my_cards.html', {'all_cards': get_cards})

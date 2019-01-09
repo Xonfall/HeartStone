@@ -1,0 +1,100 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <style>
+        .twoSquares {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .displayCards {
+            display: flex;
+            flex-wrap: wrap;
+            width: 65%;
+            overflow: scroll;
+            height: 750px;
+        }
+
+        .showDisplayCards {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            overflow: scroll;
+            height: 750px;
+            background: red;
+            margin-left: 15px;
+        }
+
+        .imgCards {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .txtCards {
+
+            cursor: pointer;
+        }
+
+    </style>
+    <h1>Créer mon deck</h1>
+
+    <div class="form-group">
+        {{ form.name }}
+    </div>
+
+    <div class="form-group" style="display: none;">
+        {{ form.user }}
+    </div>
+    <div class="twoSquares">
+        <div class="displayCards"></div>
+        <div class="showDisplayCards"></div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            const onDeleteCards = function () {
+                $('.txtCards').on('click', function () {
+
+                    $(this).remove();
+
+                });
+                return false;
+            };
+
+
+            $.ajax({
+                url: "ajax_deck",
+                type: "GET",
+                success: function (json) {
+                    for (var i = 0; i < json['data'].length; i++) {
+                        const id = json['data'][i]['id'];
+                        const name = json['data'][i]['name'];
+                        const img = json['data'][i]['img'];
+
+                        $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"></div>');
+
+
+                    }
+
+                    const dataFinal = [];
+                    $('.imgCards').on('click', function () {
+                        const arrayValues = {'id': $(this).attr('items-id'), 'name': $(this).attr('items-name')};
+                        dataFinal.push(arrayValues)
+                        $('.showDisplayCards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
+                        onDeleteCards();
+
+                        console.log(dataFinal)
+                    });
+
+
+                },
+            });
+        })
+
+    </script>
+{% endblock %}
+
