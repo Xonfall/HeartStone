@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from cards.models import Card
-from cards.models import User_cards
+# from cards.models import User_cards
 from user.models import User
 
 
@@ -34,13 +34,13 @@ def buy_cards(request):
                         Card.objects.get(id=random.randint(1, 499)),
                         Card.objects.get(id=random.randint(1, 499))
                     ]
-                    user_card_registery = User_cards.objects.create(
-                        user=User(id=user_id)
-                    )
-                    user_card_registery.save()
+                    # user_card_registery = User_cards.objects.create(
+                    #     user=User(id=user_id)
+                    #  )
+                    #  user_card_registery.save()
 
-                    for card in cards:
-                        user_card_registery.card.add(card)
+                    #   for card in cards:
+                    #  user_card_registery.card.add(card)
 
                     return render(request, 'shopping/index.html')
                 else:
