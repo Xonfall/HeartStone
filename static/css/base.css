@@ -1,0 +1,195 @@
+@font-face {
+  font-family: 'Tahoma';
+  src: url('../static/fonts/tahoma/tahomaRegular.ttf')  format("truetype"),
+       local('Tahoma');
+}
+
+* {
+
+  font-family: 'Open Sans',sans-serif,Tahoma;
+
+}
+
+.center {
+  text-align: center;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+section.cover{
+  background-color: #f7f8fa;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: auto;
+  min-height: 100vh;
+}
+
+section nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: #fff;
+}
+
+section nav .logo img{
+  height: 74px;
+}
+section nav li a {
+  text-decoration: none;
+  color: #333;
+}
+
+
+section nav ul {
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+section nav ul li {
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Open Sans',sans-serif,Tahoma;
+  font-size: 15px;
+  line-height: 1.45em;
+  font-weight: 400;
+  color: #333b40;
+}
+
+section nav ul li a{
+  display: inline-block;
+  padding: 0 14px;
+  font-size: 14px;
+  background: white;
+  height: 78px;
+  line-height: 78px;
+  -webkit-transition: all .25s;
+  -moz-transition: all .25s;
+  -o-transition: all .25s;
+  -ms-transition: all .25s;
+  transition: all .25s;
+  color: #666;
+  font-weight: 400;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  vertical-align: middle;
+
+}
+
+section nav ul li a:hover {
+
+  color: #333;
+  background-color: transparent;
+  border-color: #666;
+
+}
+
+section nav ul > li:nth-last-child(2) > a:hover {
+  background: #d5354b;
+}
+
+section.cover .content{
+  color: #333b40;
+  padding: 40px 10%;
+  position: relative;
+}
+
+section nav ul > li:nth-last-child(2) > a, section nav ul > li:last-child > a {
+  font-size: 13px;
+  padding: 10px 14px;
+  margin-top: 19px;
+  margin-left: 15px;
+  font-weight: 600;
+  border: 1px solid #999;
+  height: auto;
+  line-height: 1.5em;
+  background: transparent;
+  text-transform: uppercase;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -webkit-transition: color .3s ease-out,background .3s ease-out,border .3s ease-out;
+  -moz-transition: color .3s ease-out,background .3s ease-out,border .3s ease-out;
+  -ms-transition: color .3s ease-out,background .3s ease-out,border .3s ease-out;
+  -o-transition: color .3s ease-out,background .3s ease-out,border .3s ease-out;
+  transition: color .3s ease-out,background .3s ease-out,border .3s ease-out;
+
+}
+
+section nav ul > li:nth-last-child(2) > a {
+
+  border-color: #f4364c;
+  background: #f4364c;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.25);
+
+}
+
+section.cover form {
+  background: #fff;
+  padding: 4em 4em 2em;
+  max-width: 560px;
+  margin: 30px auto 0;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+section.cover form div {
+  margin: 0 0 3em 0;
+  position: relative;
+}
+
+label {
+	display: block;
+	font-size: 1.6em;
+	margin: 0 0 .5em;
+	color: #333;
+}
+
+input {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	outline: none
+}
+
+input[type="text"],
+input[type="password"], input[type="email"] {
+	background: #f5f5f5;
+	border: 1px solid #e5e5e5;
+	font-size: 1.6em;
+	padding: .8em .5em;
+	border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	background: #fff
+}
+
+input[type="submit"], button[type="submit"] {
+  background: #f4364c;
+  box-shadow: 0 3px 0 0 #f4364c;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 1.6em;
+  margin: 2em 0 0;
+  outline: none;
+  padding: .8em 0;
+}

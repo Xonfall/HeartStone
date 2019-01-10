@@ -5,8 +5,8 @@
 	<p>Page interdite</p>
 	{% endif %}
 
-	<h1>Register</h1>
-	<p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
+	<h1 class="center">Register</h1>
+	
 	<form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -21,6 +21,7 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <input type="submit" value="Sign up">
+    <p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
   </form>
 {% endblock %}
