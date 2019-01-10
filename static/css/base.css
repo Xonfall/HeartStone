@@ -46,7 +46,7 @@ section nav{
 section nav .logo img{
   height: 74px;
 }
-section nav li a {
+section nav li a, section nav li span {
   text-decoration: none;
   color: #333;
 }
@@ -70,7 +70,7 @@ section nav ul li {
   color: #333b40;
 }
 
-section nav ul li a{
+section nav ul li a, section nav li span {
   display: inline-block;
   padding: 0 14px;
   font-size: 14px;
@@ -96,6 +96,12 @@ section nav ul li a:hover {
   background-color: transparent;
   border-color: #666;
 
+}
+
+
+section nav li span .fas{
+  margin-right: 6px;
+  font-size: 1.4em;
 }
 
 section nav ul > li:nth-last-child(2) > a:hover {

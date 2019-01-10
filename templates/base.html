@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 
 
@@ -29,6 +30,7 @@
                       <li><a href="#">Contact</a></li>
 
                     {% if user.is_authenticated %}
+                      <li><span><i class="fas fa-coins fa-1x"></i>{{ user.money }}</span></li>
                       <li><a href="#">{{ user.get_username }}</a></li>
                       <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                     {% else %}
