@@ -13,30 +13,29 @@
         <section class="cover">
             
                 <nav>
-                  <span class="logo">
-                    Hearthstone Max.
-                  </span>
+                  <div class="logo">
+                      <img src="{% static 'img/hearthstone.png' %}" alt="My image">
+                  </div>
                   <ul>
                     {% if user.is_authenticated %}
-                      <li>Jouer</li>
-                      <li> Mon deck</a> </li>
-                      <li>Boutique</li>
-                      <li>Shopping</li>
-                      <li>Mon compte</li>
+                      <li><a href="#">Jouer</a></li>
+                      <li><a href="#">Mon deck</a> </li>
+                      <li><a href="{% url 'shopping:index' %}">Shopping</a></li>
                       {% else %}
                       <li><a href="/">Accueil</a></li>
                     {% endif %}
 
-                      <li>Forum</li>
-                      <li>Contact</li>
+                      <li><a href="#">Forum</a></li>
+                      <li><a href="#">Contact</a></li>
 
                     {% if user.is_authenticated %}
-                      <li>User: {{ user.get_username }}</li>
+                      <li><a href="#">{{ user.get_username }}</a></li>
                       <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                     {% else %}
-                      <li><a href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                      <li ><a class="ghost-btn" href="{% url 'login'%}?next={{request.path}}">Sign in</a></li>
+                      <li><a class="ghost-btn" href="{% url 'register'%}?next={{request.path}}" >Sign up</a> </li>
                     {% endif %}
-                      <li class="ghost-btn" ><a href="{% url 'register'%}?next={{request.path}}" >Sign up</a> </li>
+                      
                   </ul>
                 </nav>
                 <div class="content">

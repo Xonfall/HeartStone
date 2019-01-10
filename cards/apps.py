@@ -4,7 +4,7 @@ import requests
 from django.apps import AppConfig
 
 from cards.models import Race_card
-from cards.models import Rarity_cards
+from cards.models import Rarity_card
 
 
 class CardsConfig(AppConfig):
