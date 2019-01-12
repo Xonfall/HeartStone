@@ -10,7 +10,7 @@ services:
     links:
       - db
     environment:
-      - DJANGO_SETTINGS_MODULE=settings.dev
+      - DJANGO_SETTINGS_MODULE=settings.prod
 
   db:
     container_name: "django_db"
