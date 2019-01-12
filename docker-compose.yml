@@ -2,13 +2,15 @@ version: '3'
 services:
   web:
     container_name: "django_web"
-    build: .
+    build: docker/prod/
     ports:
       - 8000:8000
     volumes:
       - .:/app
     links:
       - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings.dev
 
   db:
     container_name: "django_db"
