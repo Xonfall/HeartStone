@@ -85,11 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# SSL, HTTPS
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
