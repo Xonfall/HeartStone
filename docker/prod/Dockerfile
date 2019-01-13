@@ -2,10 +2,9 @@ FROM python:3.6
 
 ENV DJANGO_SETTINGS_MODULE=settings.prod
 
-RUN git clone https://github.com/Xonfall/HeartStone-Django  /django/
-RUN mkdir /app; cp -R /django/* /app/
+RUN git clone https://github.com/Xonfall/HeartStone-Django  /django
 
-WORKDIR /app
+WORKDIR /django
 
 RUN pip install -r docker/prod/requirements.txt
 
