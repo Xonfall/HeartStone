@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <h1>Boutique de cartes</h1>
 <form action="buy" method="post">
     {% csrf_token %}
@@ -10,7 +12,7 @@
                 Ce pack contient :
                 <p>3 cartes aléatoires</p>
             </div>
-            <button type="submit" class="card-button" name="choice" value="choice1">Acheter</button>
+            <button type="submit" class="card-button" name="choice" value="choice1">50 pièces</button>
         </div>
         <div class="card">
             <div class="card-header">
@@ -20,7 +22,7 @@
                 Ce pack contient :
                 <p>6 cartes aléatoires</p>
             </div>
-            <button type="submit" class="card-button" name="choice" value="choice2">Acheter</button>
+            <button type="submit" class="card-button" name="choice" value="choice2">150 pièces</button>
         </div>
         <div class="card">
             <div class="card-header">
@@ -30,7 +32,7 @@
                 Ce pack contient :
                 <p>12 cartes aléatoires</p>
             </div>
-            <button type="submit" class="card-button" name="choice" value="choice3">Acheter</button>
+            <button type="submit" class="card-button" name="choice" value="choice3">350 pièces</button>
         </div>
     </div>
 </form>
@@ -66,3 +68,4 @@
         width: 100%;
     }
 </style>
+{% endblock %}
