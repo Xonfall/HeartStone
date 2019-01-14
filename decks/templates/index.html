@@ -40,17 +40,24 @@
     </style>
     <h1>Créer mon deck</h1>
 
-    <div class="form-group">
-        {{ form.name }}
-    </div>
 
-    <div class="form-group" style="display: none;">
-        {{ form.user }}
-    </div>
+
+        <div class="form-group">
+            {{ form.name }}
+        </div>
+
+
+        <button class="validate">Créer mon deck</button>
+
+        <div class="form-group" style="display: none;">
+            {{ form.user }}
+        </div>
+
     <div class="twoSquares">
         <div class="displayCards"></div>
         <div class="showDisplayCards"></div>
     </div>
+
 
 
     <script>
@@ -70,29 +77,58 @@
                 url: "ajax_deck",
                 type: "GET",
                 success: function (json) {
-                    for (var i = 0; i < json['data'].length; i++) {
+                    for (let i = 0; i < json['data'].length; i++) {
                         const id = json['data'][i]['id'];
                         const name = json['data'][i]['name'];
                         const img = json['data'][i]['img'];
-
                         $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"></div>');
-
-
                     }
 
-                    const dataFinal = [];
                     $('.imgCards').on('click', function () {
-                        const arrayValues = {'id': $(this).attr('items-id'), 'name': $(this).attr('items-name')};
-                        dataFinal.push(arrayValues)
                         $('.showDisplayCards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
                         onDeleteCards();
+                    });
 
-                        console.log(dataFinal)
+
+
+
+                    $('.validate').on('click', function (e) {
+                        e.preventDefault();
+                        const cards = [];
+
+
+                        $('.txtCards').each(function (toto, index) {
+
+                           cards.push({"card_id": $(this).attr('items-id')})
+
+
+
+
+                            console.log( cards)
+                        });
+
+                         $.ajax({
+                                url: "ajax_createDeck",
+                                type: "POST",
+                                data: {
+                                    'forms[]': JSON.stringify(cards), // from form
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                },
+                                success: function (json) {
+                                    console.log(json);
+
+                                },
+                            });
+
+
+
                     });
 
 
                 },
             });
+
+
         })
 
     </script>
