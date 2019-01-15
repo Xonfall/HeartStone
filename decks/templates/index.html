@@ -23,7 +23,7 @@
             width: 30%;
             overflow: scroll;
             height: 750px;
-            background: red;
+            background: #766255;
             margin-left: 15px;
         }
 
@@ -33,24 +33,56 @@
         }
 
         .txtCards {
-
+            background: #ae9b8a;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5%;
             cursor: pointer;
         }
 
+        .txtCards:hover {
+            background: #f006;
+            color: #fff;
+        }
+
+        .numberCards {
+            text-align: center;
+            font-weight: bold;
+            font-size: 31px;
+            background: #60605c;
+            color: white;
+            margin: 9px;
+            padding: 10px;
+        }
+
+        .selected {
+            opacity: 0.5;
+        }
     </style>
     <h1>Créer mon deck</h1>
+
+
 
     <div class="form-group">
         {{ form.name }}
     </div>
 
+
+    <button class="validate">Créer mon deck</button>
+
     <div class="form-group" style="display: none;">
         {{ form.user }}
     </div>
+
     <div class="twoSquares">
         <div class="displayCards"></div>
-        <div class="showDisplayCards"></div>
+
+        <div class="showDisplayCards">
+            <div class="numberCards">Cartes : 0 / 30</div>
+            <div class="cards"></div>
+        </div>
     </div>
+
 
 
     <script>
@@ -58,8 +90,11 @@
 
             const onDeleteCards = function () {
                 $('.txtCards').on('click', function () {
-
                     $(this).remove();
+                    let ez = $(this).attr('items-id');
+                    $('div[items-id=' + ez + ']').removeClass('selected');
+                    let n = $(".txtCards").length;
+                    $('.numberCards').html('Cartes : ' + n + ' / 30')
 
                 });
                 return false;
@@ -70,29 +105,92 @@
                 url: "ajax_deck",
                 type: "GET",
                 success: function (json) {
-                    for (var i = 0; i < json['data'].length; i++) {
+                    let array = [];
+                    for (let i = 0; i < json['data'].length; i++) {
                         const id = json['data'][i]['id'];
                         const name = json['data'][i]['name'];
                         const img = json['data'][i]['img'];
 
-                        $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"></div>');
+                          array.push({'id': id, 'name': name, 'img': img});
 
 
                     }
 
-                    const dataFinal = [];
-                    $('.imgCards').on('click', function () {
-                        const arrayValues = {'id': $(this).attr('items-id'), 'name': $(this).attr('items-name')};
-                        dataFinal.push(arrayValues)
-                        $('.showDisplayCards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
-                        onDeleteCards();
+                    const result = [];
+                    const map = new Map();
+                    for (var ze in array) {
+                        const id = array[ze].id;
+                        const name = array[ze].name;
+                        const img = array[ze].img;
 
-                        console.log(dataFinal)
+                        let varse = "null";
+
+                        if (!map.has(id)) {
+                            map.set(id, true);    // set any value to Map
+                            varse = "X2";
+                        } else {
+                           $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> X2 </div>');
+
+                        }
+
+                   
+
+
+
+                    }
+
+
+                    $('.imgCards').on('click', function () {
+                        const n = $(".txtCards").length;
+                        let le = 0;
+                        le = n + 1
+                        $('.numberCards').html('Cartes : ' + le + ' / 30')
+                        $('.cards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
+
+                        $(this).addClass('selected');
+
+                        onDeleteCards();
+                    });
+
+
+                    $('.validate').on('click', function (e) {
+                        e.preventDefault();
+                        const cards = [];
+                        const countDivCards = parseInt($(".txtCards").length);
+
+
+                        if (countDivCards !== 30) {
+                            alert('ERROR 30 CARTES FRERES OBLIGER');
+                        } else {
+
+                            $('.txtCards').each(function () {
+                                cards.push({"card_id": $(this).attr('items-id')})
+
+                            });
+                            $.ajax({
+                                url: "ajax_createDeck",
+                                type: "POST",
+                                data: {
+                                    'name': $('#id_name').val(),
+                                    'cards[]': JSON.stringify(cards), // from form
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                },
+                                success: function (json) {
+                                    console.log(json);
+
+                                },
+                            });
+
+                        }
+
+
                     });
 
 
                 },
             });
+
+
         })
 
     </script>

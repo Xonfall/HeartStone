@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.forms import ModelForm
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from cards.apps import CardValidator
 from cards.apps import Cards
 from cards.models import Card
 from cards.models import Race_card
 from cards.models import Rarity_card
+from cards.models import Card_user
 from user.models import User
 
 
@@ -14,6 +15,10 @@ class CardForm(ModelForm):
 
     # @login_required
     def index(request):
+
+        for x in range(1, 29):
+            insert_cards = Card_user(card_id=x, user_id=request.user.id)
+            insert_cards.save()
         return render(request, 'index.html')
 
     def all(request):
@@ -73,6 +78,12 @@ def my_cards(request):
         return redirect('login')
     else:
         u1 = request.user
-        get_cards = u1.card_set.all()
+        relative_news = Card.objects.filter(card_user__in=Card_user.objects.filter(user_id=request.user.id))
 
-    return render(request, 'my_cards.html', {'all_cards': get_cards})
+        #relative_news = Card_user.objects.filter(card_id=Card.objects.all())
+
+      #  get_cards = Card.objects.filter(id=Card_user.objects.all())
+
+
+
+    return render(request, 'my_cards.html', {'all_cards': relative_news})

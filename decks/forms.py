@@ -5,4 +5,4 @@ from django.forms import ModelForm
 class DecksForm(ModelForm):
     class Meta:
         model = Deck
-        fields = {'name', "user", "cards"}
+        fields = {'name'}
