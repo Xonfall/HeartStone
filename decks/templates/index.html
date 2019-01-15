@@ -58,6 +58,10 @@
         .selected {
             opacity: 0.5;
         }
+
+
+
+
     </style>
     <h1>Créer mon deck</h1>
 
@@ -88,85 +92,95 @@
     <script>
         $(document).ready(function () {
 
-            const onDeleteCards = function () {
+
+            const returnNumber = function (id, array) {
+                return array[id];
+            };
+
+            const onDeleteCards = function (elementThis, titi) {
+                let nbrElement = 0;
                 $('.txtCards').on('click', function () {
                     $(this).remove();
-                    let ez = $(this).attr('items-id');
-                    $('div[items-id=' + ez + ']').removeClass('selected');
+                    let ez = elementThis.attr('items-id');
+                    let nbrsOfSelectedElement = returnNumber(ez, titi);
+                    if (elementThis.attr("items-id") === $(this).attr('items-id')) {
+                        nbrElement = nbrElement + 1;
+                        elementThis.find('span').text(nbrElement);
+                        if (nbrElement >= nbrsOfSelectedElement) {
+                            $('div[items-id=' + elementThis.attr("items-id") + ']').removeClass('selected');
+                            elementThis.find('span').text(nbrsOfSelectedElement);
+                        }
+                    }
+
                     let n = $(".txtCards").length;
                     $('.numberCards').html('Cartes : ' + n + ' / 30')
-
                 });
                 return false;
             };
-
 
             $.ajax({
                 url: "ajax_deck",
                 type: "GET",
                 success: function (json) {
                     let array = [];
-                    var count = {};
+                    const map = new Map();
                     for (let i = 0; i < json['data'].length; i++) {
                         const id = json['data'][i]['id'];
                         const name = json['data'][i]['name'];
                         const img = json['data'][i]['img'];
 
+
                         array.push({'id': id, 'name': name, 'img': img});
+
+
                         var titi = array.reduce(function (prev, cur) {
                             prev[cur.id] = (prev[cur.id] || 0) + 1;
                             return prev;
                         }, {});
-
                     }
 
-                    const result = [];
-                    const map = new Map();
-                    /*for (var ze in array) {
+                    let tote = 0
+                    for (var ze in array) {
                         const id = array[ze].id;
                         const name = array[ze].name;
                         const img = array[ze].img;
 
 
-
-
-
-
-                    }*/
-
-                    for (var ze in titi) {
-                        const id = array[ze].id;
-                        const name = array[ze].name;
-                        const img = array[ze].img;
-
-                        let tote = 0;
-                        if (titi[id] === 1) {
-                            tote = "X1"
-
-                        } else if (titi[id] === 2) {
-                            tote = "X2"
-                        } else {
-                            tote = "X3"
+                        if (!map.has(id)) {
+                            map.set(id);
+                            if (titi[id] === 1) {
+                                tote = 1
+                            } else if (titi[id] === 2) {
+                                tote = 2
+                            } else {
+                                tote = 3
+                            }
+                            $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> x<span class="nbrElement">' + tote + '</span></div>');
                         }
-
-                        $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> ' + tote + '</div>');
-
-
-
                     }
-                    //console.log(titi)
-
 
                     $('.imgCards').on('click', function () {
                         const n = $(".txtCards").length;
                         let le = 0;
                         le = n + 1
-                        $('.numberCards').html('Cartes : ' + le + ' / 30')
-                        $('.cards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
+                        let nbrElement = parseInt($(this).find('span').text());
+                        console.log()
+                        nbrElement = nbrElement - 1;
+                        if (nbrElement === 0) {
+                            $(this).addClass('selected');
+                        }
+                        if (nbrElement >= 0) {
+                            $(this).find('span').text(nbrElement);
+                            $('.numberCards').html('Cartes : ' + le + ' / 30');
 
-                        $(this).addClass('selected');
+                            $('.cards').append('<div class="txtCards" items-id="' + $(this).attr('items-id') + '">' + $(this).attr('items-name') + '</div>');
+                        }
 
-                        onDeleteCards();
+                        if (nbrElement < 0) {
+                            return false;
+                        }
+
+                        onDeleteCards($(this), titi);
                     });
 
 
@@ -174,7 +188,6 @@
                         e.preventDefault();
                         const cards = [];
                         const countDivCards = parseInt($(".txtCards").length);
-
 
                         if (countDivCards !== 30) {
                             alert('ERROR 30 CARTES FRERES OBLIGER');
