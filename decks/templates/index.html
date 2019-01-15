@@ -106,38 +106,55 @@
                 type: "GET",
                 success: function (json) {
                     let array = [];
+                    var count = {};
                     for (let i = 0; i < json['data'].length; i++) {
                         const id = json['data'][i]['id'];
                         const name = json['data'][i]['name'];
                         const img = json['data'][i]['img'];
 
-                          array.push({'id': id, 'name': name, 'img': img});
-
+                        array.push({'id': id, 'name': name, 'img': img});
+                        var titi = array.reduce(function (prev, cur) {
+                            prev[cur.id] = (prev[cur.id] || 0) + 1;
+                            return prev;
+                        }, {});
 
                     }
 
                     const result = [];
                     const map = new Map();
-                    for (var ze in array) {
+                    /*for (var ze in array) {
                         const id = array[ze].id;
                         const name = array[ze].name;
                         const img = array[ze].img;
 
-                        let varse = "null";
 
-                        if (!map.has(id)) {
-                            map.set(id, true);    // set any value to Map
-                            varse = "X2";
+
+
+
+
+                    }*/
+
+                    for (var ze in titi) {
+                        const id = array[ze].id;
+                        const name = array[ze].name;
+                        const img = array[ze].img;
+
+                        let tote = 0;
+                        if (titi[id] === 1) {
+                            tote = "X1"
+
+                        } else if (titi[id] === 2) {
+                            tote = "X2"
                         } else {
-                           $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> X2 </div>');
-
+                            tote = "X3"
                         }
 
-                   
+                        $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> ' + tote + '</div>');
 
 
 
                     }
+                    //console.log(titi)
 
 
                     $('.imgCards').on('click', function () {
