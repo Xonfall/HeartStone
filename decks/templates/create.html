@@ -107,7 +107,6 @@
                             $('div[items-id=' + elementThis.attr("items-id") + ']').removeClass('selected');
                             elementThis.find('span').text(nbrsOfSelectedElement);
                         }
-                        console.log(nbrElement);
                     }
 
                     let n = $(".txtCards").length;
@@ -137,7 +136,6 @@
                         }, {});
                     }
 
-                    let tote = 0
                     for (var ze in array) {
                         const id = array[ze].id;
                         const name = array[ze].name;
@@ -146,14 +144,8 @@
 
                         if (!map.has(id)) {
                             map.set(id);
-                            if (titi[id] === 1) {
-                                tote = 1
-                            } else if (titi[id] === 2) {
-                                tote = 2
-                            } else {
-                                tote = 3
-                            }
-                            $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> x<span class="nbrElement">' + tote + '</span></div>');
+
+                            $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> x<span class="nbrElement">' + titi[id] + '</span></div>');
                         }
                     }
 
@@ -208,7 +200,6 @@
 
                                 },
                             });
-
 
                         }
 

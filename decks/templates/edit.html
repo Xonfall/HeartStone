@@ -93,7 +93,6 @@
             const returnNumber = function (id, array) {
                 return array[id];
             };
-
             const onDeleteCards = function (elementThis, titi, edit) {
                 let nbrElement = parseInt(elementThis.find('span').text());
                 $('.txtCards').on('click', function () {
@@ -121,24 +120,20 @@
                             elementThis.find('span').text(titi);
                         }
                     }
-
-                     $.ajax({
-                            url: '/deck/ajax_addCardUser/' + url,
-                            type: "POST",
-                            data: {
-                                'addCardsId': parseInt($(this).attr('items-id')),
-                                'csrfmiddlewaretoken': '{{ csrf_token }}',
-                            },
-                            success: function (json) {
-                                console.log('ok')
-
-
-                            },
-                        });
+                    $.ajax({
+                        url: '/deck/ajax_addCardUser/' + url,
+                        type: "POST",
+                        data: {
+                            'addCardsId': parseInt($(this).attr('items-id')),
+                            'csrfmiddlewaretoken': '{{ csrf_token }}',
+                        },
+                        success: function (json) {
+                            console.log('ok')
+                        },
+                    });
                     let n = $(".txtCards").length;
                     $('.numberCards').html('Cartes : ' + n + ' / 30')
                 });
-
             };
             const url = window.location.pathname.split('/')[3];
             let arrayEditCard = [];
@@ -162,10 +157,8 @@
                             prev[cur.id] = (prev[cur.id] || 0) + 1;
                             return prev;
                         }, {});
+                    }
 
-                    } console.log(array)
-
-                    let tote = 0
                     for (var ze in array) {
                         const id = array[ze].id;
                         const name = array[ze].name;
@@ -173,7 +166,6 @@
 
                         if (!map.has(id)) {
                             map.set(id);
-
                             $('.displayCards').append('<div class="imgCards" items-name="' + name + '" items-id="' + id + '"><img src="' + img + '"  width="200px"> x<span class="nbrElement">' + titi1[id] + '</span></div>');
                         }
                     }
@@ -206,9 +198,7 @@
                                 'csrfmiddlewaretoken': '{{ csrf_token }}',
                             },
                             success: function (json) {
-                                 console.log('ok')
-
-
+                                console.log('ok')
                             },
                         });
 
@@ -246,76 +236,34 @@
                         }
                     });
 
-                    getChanges = function (prev, now) {
-                        var changes = {}, prop, pc;
-                        for (prop in now) {
-                            if (!prev || prev[prop] !== now[prop]) {
-                                if (typeof now[prop] == "object") {
-                                    if (c = getChanges(prev[prop], now[prop]))
-                                        changes[prop] = c;
-                                } else {
-                                    changes[prop] = now[prop];
-                                }
-                            }
-                        }
-
-                        for (prop in prev) {
-                            if (!now || now[prop] !== prev[prop]) {
-                                if (typeof prev[prop] == "object") {
-                                    if (c = getChanges(now[prop], prev[prop]))
-                                        changes[prop] = c;
-                                } else {
-                                    changes[prop] = prev[prop];
-                                }
-                            }
-                        }
-
-                        return changes;
-                    };
                     $('.validate').on('click', function (e) {
                         e.preventDefault();
                         const cards = [];
-                        const cardToAdd = [];
                         const countDivCards = parseInt($(".txtCards").length);
 
-                        /* if (countDivCards !== 30) {
-                             alert('ERROR 30 CARTES FRERES OBLIGER');
-                         } else {*/
+                        if (countDivCards !== 30) {
+                            alert('ERROR 30 CARTES FRERES OBLIGER');
+                        } else {
 
-                        $('.txtCards').each(function () {
-                            cards.push({"card_id": $(this).attr('items-id')})
+                            $('.txtCards').each(function () {
+                                cards.push({"card_id": $(this).attr('items-id')})
 
-                        });
+                            });
+                            const url = window.location.pathname.split('/')[3];
+                            $.ajax({
+                                url: '/deck/ajax_editDeck/' + url,
+                                type: "POST",
+                                data: {
+                                    'name': $('#id_name').val(),
+                                    'cards[]': JSON.stringify(cards),
+                                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                                },
+                                success: function (json) {
+                                    //console.log(json);
 
-                        $('.imgCards').each(function () {
-
-
-                            cardToAdd[parseInt($(this).attr('items-id'))] = parseInt($('.imgCards[items-id="' + $(this).attr('items-id') + '"]').find('span').text());
-
-
-                        });
-
-                        const addCards = getChanges(cardToAdd, titi1);
-
-
-                        const url = window.location.pathname.split('/')[3];
-                        $.ajax({
-                            url: '/deck/ajax_editDeck/' + url,
-                            type: "POST",
-                            data: {
-                                'name': $('#id_name').val(),
-                                'cards[]': JSON.stringify(cards),
-                                'csrfmiddlewaretoken': '{{ csrf_token }}',
-                            },
-                            success: function (json) {
-                                //console.log(json);
-
-                            },
-                        });
-
-
-                        // }
-
+                                },
+                            });
+                        }
                     });
                 },
             });

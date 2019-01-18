@@ -159,22 +159,12 @@ def ajax_editDeck(request, id):
         getAllCards = request.POST['cards[]']
         name = request.POST['name']
         Deck.objects.filter(id=id).update(name=name)
-        arrayGetcountDoublon = []
 
-        Deck_user.objects.filter(deck_id=id).delete();
+        Deck_user.objects.filter(deck_id=id).delete()
 
         for i in json.loads(getAllCards):
             entry = Deck.objects.get(id=id)
             inserCards = Deck_user(card_id=i['card_id'], deck_id=entry.id)
             inserCards.save()
-            arrayGetcountDoublon.append(i['card_id'])
-
-        count_cards = {k: arrayGetcountDoublon.count(k) for k in set(arrayGetcountDoublon)}
-
-        for i in count_cards:
-            if i:
-                cccmoi = list(Card_user.objects.filter(card_id=i))
-                for zizi in range(count_cards[i]):
-                    Card_user.objects.filter(user_id=request.user.id, id=cccmoi[zizi].id).delete()
 
     return HttpResponse('ok')
