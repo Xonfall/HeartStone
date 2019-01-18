@@ -13,7 +13,7 @@ from user.models import User
 
 class CardForm(ModelForm):
 
-    # @login_required
+    @login_required
     def index(request):
 
         for x in range(1, 29):
@@ -64,6 +64,7 @@ class CardForm(ModelForm):
         return render(request, 'cards.html', {'lines': Card.objects.all().count()})
 
 
+@login_required
 def cards(request, id_card):
     if not request.user.is_authenticated:
         return redirect('login')
@@ -77,13 +78,6 @@ def my_cards(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        u1 = request.user
         relative_news = Card.objects.filter(card_user__in=Card_user.objects.filter(user_id=request.user.id))
-
-        #relative_news = Card_user.objects.filter(card_id=Card.objects.all())
-
-      #  get_cards = Card.objects.filter(id=Card_user.objects.all())
-
-
 
     return render(request, 'my_cards.html', {'all_cards': relative_news})

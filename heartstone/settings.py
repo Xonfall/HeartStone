@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'decks',
     'cards',
     'shopping',
+    'forum',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
