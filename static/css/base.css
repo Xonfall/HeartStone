@@ -22,7 +22,7 @@ body{
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: #333;
 }
 
 section.cover{
@@ -146,7 +146,7 @@ section nav ul > li:nth-last-child(2) > a {
 
 section.cover form {
   background: #fff;
-  padding: 4em 4em 2em;
+  padding: 40px 40px 40px;
   max-width: 560px;
   margin: 30px auto 0;
   border-radius: 5px;
@@ -187,6 +187,7 @@ input[type="password"]:focus {
 }
 
 input[type="submit"], button[type="submit"] {
+  width: 100%;
   background: #f4364c;
   box-shadow: 0 3px 0 0 #f4364c;
   border-radius: 5px;
@@ -199,3 +200,69 @@ input[type="submit"], button[type="submit"] {
   outline: none;
   padding: .8em 0;
 }
+
+
+
+.profile-info {
+    text-align: center;
+}
+
+.profile-card-name {
+  font-weight: 700;
+  font-size: 24px;
+  color: #6944ff;
+  margin-bottom: 15px;
+}
+
+.follow-table {
+  margin: auto;
+  width: 50%;
+}
+
+.wrapper {
+    background: #fff;
+    padding: 40px 40px 40px;
+    max-width: 560px;
+    margin: 30px auto 0;
+    border-radius: 5px;
+}
+
+#search_results a:hover {
+  color: #d5354b;
+}
+
+
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.alert {
+  padding: 15px 40px;
+  margin: 20px auto;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  display: none;
+  max-width: 560px;
+}
+
+button.close {
+  -webkit-appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+}
+
+.close {
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+

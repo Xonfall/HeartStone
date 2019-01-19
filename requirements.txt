@@ -1,3 +1,4 @@
 requests
 Django == 2.*
 psycopg2-binary
+Pillow==5.*
