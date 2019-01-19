@@ -3,11 +3,18 @@
 
 
 {% block content %}
-   <h1>voir les forums</h1>
+    <h1>voir les forums</h1>
 
-
-    Les forums freres
-
-
+    {% for forums in queryset %}
+        {% if forums.lock == 1 %}
+            Ce forum est bloqué
+        {% else %}
+            Ce forum est ouvert
+        {% endif %}
+        <a href="views/{{ forums.id }}" style="color:red;">{{ forums.title }}</a><br>
+        {{ forums.description|safe }}
+        <td><b>{{ forums.getTopics|length }}</b></td>
+        <hr>
+    {% endfor %}
 {% endblock %}
 

@@ -1,0 +1,45 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>voir les topics</h1>
+
+    {% for forum in forum_set %}
+        <h2>{{ forum.title }}</h2>
+    {% endfor %}
+    {% for topic in queryset %}
+        <a href="/forum/topic/{{ topic.id }}" style="color:red;">{{ topic.title }}</a>
+        <hr>
+        {% for topic in topic.getTopicsUser %}
+            created by  <b>{{ topic.username }}</b>
+        {% endfor %}
+
+        Dernier message le :
+        <a href="/forum/topic/{{ topic.id }}" style="color:red">{{ topic.getLastComments.created_on }}
+            par {{ topic.getLastComments.commented_by }}</a>
+        <br>
+    {% endfor %}
+
+    <br><br><br><br>
+
+    {% for forum in forum_set %}
+        {% if forum.lock == False or request.user.is_superuser %}
+            <a href="/forum/newtopic/{{ id }}" style="color:red">Create new topic</a>
+        {% endif %}
+
+
+    {% endfor %}
+
+
+    {% if request.user.is_superuser %}
+        {% for forum in forum_set %}
+            {% if forum.lock == False %}
+                <a href="/forum/blockforum/{{ id }}" style="color:red">Bloquer le forum</a>
+            {% else %}
+                <a href="/forum/unblockforum/{{ id }}" style="color:red">Debloquer le forum</a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+

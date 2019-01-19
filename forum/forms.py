@@ -1,102 +1,31 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 
-from forum.models import Forum
+from forum.models import Forum, Topic, Post
 from user.models import User
 from django import forms
 
 
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model = ForumCategory
-        exclude = ('slug', 'created_by')
-
-    def clean_title(self):
-        if ForumCategory.objects.filter(slug=slugify(self.cleaned_data['title'])).exclude(id=self.instance.id):
-            raise forms.ValidationError('Category with this Name already exists.')
-
-        return self.cleaned_data['title']
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super(CategoryForm, self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        instance = super(CategoryForm, self).save(commit=False)
-        instance.created_by = self.user
-        instance.title = self.cleaned_data['title']
-        if str(self.cleaned_data['is_votable']) == 'True':
-            instance.is_votable = True
-        else:
-            instance.is_votable = False
-        if str(self.cleaned_data['is_active']) == 'True':
-            instance.is_active = True
-        else:
-            instance.is_active = False
-        if not self.instance.id:
-            instance.slug = slugify(self.cleaned_data['title'])
-
-        if commit:
-            instance.save()
-        return instance
-
-
-class TopicForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super(TopicForm, self).__init__(*args, **kwargs)
-        self.fields["category"].widget.attrs = {"class": "form-control select2"}
-        self.fields["title"].widget.attrs = {"class": "form-control"}
-        self.fields["tags"].widget.attrs = {"class": "form-control tags"}
-
-    tags = forms.CharField(required=False)
-
+class TopicForm(ModelForm):
     class Meta:
         model = Topic
-        fields = ("title", "category", "description", "tags")
 
-    def clean_title(self):
-        if Topic.objects.filter(slug=slugify(self.cleaned_data['title'])).exclude(id=self.instance.id):
-            raise forms.ValidationError('Topic with this Name already exists.')
-
-        return self.cleaned_data['title']
-
-    def save(self, commit=True):
-        instance = super(TopicForm, self).save(commit=False)
-        instance.title = self.cleaned_data['title']
-        instance.description = self.cleaned_data['description']
-        instance.category = self.cleaned_data['category']
-        if not self.instance.id:
-            instance.slug = slugify(self.cleaned_data['title'])
-            instance.created_by = self.user
-            instance.status = 'Draft'
-        if commit:
-            instance.save()
-        return instance
+        title = forms.CharField(
+            label='title',
+            max_length=100,
+            widget=forms.TextInput(attrs={'class': 'form-control'}),
+            required=True
+        )
+        widgets = {
+            'description': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Description du topic'}),
+        }
+        fields = ['title', 'description']
 
 
-class CommentForm(forms.ModelForm):
+class PostForm(ModelForm):
     class Meta:
-        model = Comment
-        fields = ('comment', 'topic')
-
-    def clean_comment(self):
-        if self.cleaned_data['comment']:
-            return self.cleaned_data['comment']
-        raise forms.ValidationError('This field is required')
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super(CommentForm, self).__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        instance = super(CommentForm, self).save(commit=False)
-        instance.comment = self.cleaned_data['comment']
-        instance.topic = self.cleaned_data['topic']
-        if not self.instance.id:
-            instance.commented_by = self.user
-            if 'parent' in self.cleaned_data.keys() and self.cleaned_data['parent']:
-                instance.parent = self.cleaned_data['parent']
-        if commit:
-            instance.save()
-        return instance
+        model = Post
+        widgets = {
+            'comment': forms.Textarea(attrs={'required': True, 'rows': 4, 'placeholder': 'Commentaire'}),
+        }
+        fields = ['comment']

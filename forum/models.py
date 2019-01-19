@@ -2,12 +2,6 @@ from django.db import models
 from user.models import User
 from django.conf import settings
 
-STATUS = (
-    ('Draft', 'Draft'),
-    ('Writed', 'Writed'),
-    ('Disabled', 'Disabled'),
-)
-
 
 # Create your models here.
 class Forum(models.Model):
@@ -15,10 +9,9 @@ class Forum(models.Model):
     description = models.TextField()
     lock = models.BooleanField(default=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent = models.ForeignKey('self', blank=True, null=True)
 
-    def get_topics(self):
-        topics = Topic.objects.filter(category=self, status='Writed')
+    def getTopics(self):
+        topics = Topic.objects.filter(category=self, status='S')
         return topics
 
     def __str__(self):
@@ -28,28 +21,32 @@ class Forum(models.Model):
 class Topic(models.Model):
     title = models.CharField(max_length=2000)
     description = models.TextField()
-    created_by = models.ForeignKey(User)
-    status = models.CharField(choices=STATUS, max_length=10)
-    category = models.ForeignKey(Forum)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(default='S', max_length=1)
+    category = models.ForeignKey(Forum, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
-    no_of_views = models.IntegerField(default='0')
+    views = models.IntegerField(default='0')
 
-    def get_comments(self):
-        post = Post.objects.filter(topic=self, parent=None)
-        return post
+    def getComments(self):
+        comments = Post.objects.filter(topic=self, parent=None)
+        return comments
 
-    def get_all_comments(self):
-        post = Post.objects.filter(topic=self)
-        return post
+    def getTopicsUser(self):
+        users = User.objects.filter(id=self.created_by.id)
+        return users
 
-    def get_last_comment(self):
-        post = Post.objects.filter(topic=self).order_by('-updated_on').first()
-        return post
+    def getAllComments(self):
+        comments = Post.objects.filter(topic=self)
+        return comments
 
-    def get_topic_users(self):
-        post_user_ids = Post.objects.filter(topic=self).values_list('post_by', flat=True)
-        return post_user_ids
+    def getLastComments(self):
+        comments = Post.objects.filter(topic=self).order_by('-created_on').first()
+        return comments
+
+    def getForum(self):
+        forum = Forum.objects.filter(id=self.category_id)
+        return forum
 
     def __str__(self):
         return self.title
@@ -57,12 +54,10 @@ class Topic(models.Model):
 
 class Post(models.Model):
     comment = models.TextField(null=True, blank=True)
-    commented_by = models.ForeignKey(User, related_name="post_by")
-    topic = models.ForeignKey(Topic, related_name="topic_comments")
+    commented_by = models.ForeignKey(User, related_name="post_by", on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, related_name="topic_comments", on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
-    parent = models.ForeignKey("self", blank=True, null=True, related_name="comment_parent")
 
-    def get_comments(self):
-        post = self.post_parent.all()
-        return post
+    def __str__(self):
+        return self.comment

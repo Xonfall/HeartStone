@@ -1,0 +1,14 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% if blocked == 1 %}
+        This forum is blocked.
+    {% endif %}
+
+    {% if blocked == 0 %}
+        This forum is unblocked.
+    {% endif %}
+{% endblock %}
+
