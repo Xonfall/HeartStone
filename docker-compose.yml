@@ -1,18 +1,19 @@
 version: '3'
 services:
-  web:
-    container_name: "django_web"
-    build: .
-    ports:
-      - 8000:8000
-    volumes:
-      - .:/app
-    links:
-      - db
-
   db:
     container_name: "django_db"
     image: postgres:11.1
     restart: always
     ports:
       - 5432:5432
+  web:
+    container_name: "django_web"
+    build: docker/dev/
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    links:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings.dev
