@@ -43,3 +43,16 @@ $("#edit").click(function () {
         }
     });
 });
+
+
+$(".follower-following-tab").click(function () {
+    let type = $(this).attr("data-type");
+    
+    $(".pop").find(`[data-type='${type}']`).show();
+    $(".pop").fadeIn(300);
+});
+
+$(".pop > .pop-up-close-btn").click(function () {
+    $(".pop").fadeOut(300);
+    $('.following-follower-list').hide();
+});

@@ -38,7 +38,7 @@ def register(request):
 @login_required(login_url='/user/login/')
 def edit(request):
     if request.method == 'POST':
-        form = EditForm(request.POST)
+        form = EditForm(request.POST, instance=request.user)
         if form.is_valid():
             username = form.cleaned_data["username"]
             email = form.cleaned_data["email"]
@@ -101,9 +101,12 @@ def unfollow(request):
         f.delete()
         return JsonResponse({'status': 'ok'})
 
+
+
 @login_required(login_url='/user/login/')
 def search_user(request):
-    return render_to_response('user/list.html',{}, RequestContext(request))
+    return render(request, 'user/list.html')
+
 
 def ajax_search(request):
     username = ''

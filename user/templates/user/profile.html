@@ -36,15 +36,39 @@
             
                         <table class="follow-table">
                             <tr>
-                                <td class="followers-number">{{ followers.count }}</td>
-                                <td class="followings-number">{{ other.follow.count }}</td>
+                                <td class="followers-number"><a href="#follower-tab" class="follower-following-tab" data-type="follower" >{{ followers.count }}</a></td>
+                                <td class="followings-number"><a href="#follower-tab" class="follower-following-tab" data-type="follower" >{{ other.follow.count }}</a></td>
                             </tr>
                             <tr>
-                                <th><a href="#follower-tab" data-toggle="tab" >Follower</a></th>
-                                <th><a href="#following-tab" data-toggle="tab" >Following</a></th>
+                                <th><a href="#follower-tab" class="follower-following-tab" data-type="follower" >Follower</a></th>
+                                <th><a href="#following-tab" class="follower-following-tab" data-type="following" >Following</a></th>
                             </tr>
                             
                         </table>
+
+                        <div class="pop">
+                                <span class="pop-up-close-btn">✖</span>
+                                
+                                <div class="following-follower-list" data-type="following">
+                                        <h1>Following</h1>
+                                        <ul class="profile-popup-list">    
+                                            {% for u in other.follow.all %}
+                                                <li><a href="/profile/{{ u.username }}">{{ u.username }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                </div>
+                                
+                                <div class="following-follower-list" data-type="follower">
+                                        <h1>Follower</h1>
+                                        <ul class="profile-popup-list">  
+                                            {% for u in followers.all %}
+                                                <li><a href="/profile/{{ u.username }}">{{ u.username }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                </div>
+                                
+
+                        </div>
                 </div>
             
             </div>
@@ -73,7 +97,7 @@
                                 title="Please enter your email"
                                 required>
                     </div>
-                
+                            
                     <button type="submit" id="edit" username="{{ user.username }}">
                         Edit
                     </button>
