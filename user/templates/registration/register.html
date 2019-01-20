@@ -5,23 +5,26 @@
 	<p>Page interdite</p>
 	{% endif %}
 
-	<h1 class="center">Register</h1>
+  <div class="wrapper">
+    <h1 class="center">Register</h1>
 	
-	<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <input type="submit" value="Sign up">
-    <p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
-  </form>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <p>
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      <input type="submit" value="Sign up">
+      <p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
+    </form>
+  </div>
+	
 {% endblock %}

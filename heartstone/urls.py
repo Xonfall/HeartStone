@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from . import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
@@ -27,3 +30,5 @@ urlpatterns = [
     path('profile/', include('user.urls')),
 
 ]
+
+handler404 = 'heartstone.views.error_404_view'

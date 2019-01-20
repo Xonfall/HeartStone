@@ -7,6 +7,8 @@ from .forms import MyCustomUserForm, EditForm
 from django.http.response import HttpResponse, JsonResponse
 from .models import User, Follow
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -14,8 +16,7 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        return render(request, 'user/index.html')
-
+        return redirect("/")
 
 def register(request):
     if request.method == 'POST':
@@ -27,13 +28,14 @@ def register(request):
             user = authenticate(username=username, password=password)
             
             login(request, user)
-            return redirect('index')
+            return redirect("/")
     else:
         form = MyCustomUserForm()
     context = {'form': form}
     return render(request, 'registration/register.html', context)
 
 @csrf_exempt
+@login_required(login_url='/user/login/')
 def edit(request):
     if request.method == 'POST':
         form = EditForm(request.POST)
@@ -48,6 +50,7 @@ def edit(request):
         else :
             return JsonResponse({'status': 'no'})
 
+@login_required(login_url='/user/login/')
 def show_profile(request, username, number_of_posts=2):
     nowUser = User.objects.get(id=request.user.id)
     try:
@@ -70,7 +73,7 @@ def show_profile(request, username, number_of_posts=2):
                               {"user": nowUser, "owner": False, "follows": False, "other": user
                                   , "followers": followers, "is_scroll": True})
     else:
-        return redirect("/home")
+        return redirect("/")
 
 @csrf_exempt
 def follow(request):
@@ -98,7 +101,7 @@ def unfollow(request):
         f.delete()
         return JsonResponse({'status': 'ok'})
 
-
+@login_required(login_url='/user/login/')
 def search_user(request):
     return render_to_response('user/list.html',{}, RequestContext(request))
 

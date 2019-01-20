@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -103,7 +102,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
@@ -111,5 +111,8 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join('static'),
-    '/var/www/static/',
+    'static/',
 ]
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')

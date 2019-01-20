@@ -12,7 +12,7 @@ class CardForm(ModelForm):
 
     # @login_required
     def index(request):
-        return render(request, 'index.html')
+        return redirect("/")
 
     def all(request):
         cards_api = Cards()
