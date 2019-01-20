@@ -1,39 +1,44 @@
-<h1>Boutique de cartes</h1>
-<form action="buy" method="post">
-    {% csrf_token %}
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Le starteur</h2>
+
+<div class="wrapper">
+    <h1>Boutique de cartes</h1>
+    <form action="buy" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Le starteur</h2>
+                </div>
+                <div class="card-content">
+                    Ce pack contient :
+                    <p>3 cartes aléatoires</p>
+                </div>
+                <button type="submit" class="card-button" name="choice" value="choice1">Acheter</button>
             </div>
-            <div class="card-content">
-                Ce pack contient :
-                <p>3 cartes aléatoires</p>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Le conquérant</h2>
+                </div>
+                <div class="card-content">
+                    Ce pack contient :
+                    <p>6 cartes aléatoires</p>
+                </div>
+                <button type="submit" class="card-button" name="choice" value="choice2">Acheter</button>
             </div>
-            <button type="submit" class="card-button" name="choice" value="choice1">Acheter</button>
+            <div class="card">
+                <div class="card-header">
+                    <h2>L'invincible</h2>
+                </div>
+                <div class="card-content">
+                    Ce pack contient :
+                    <p>12 cartes aléatoires</p>
+                </div>
+                <button type="submit" class="card-button" name="choice" value="choice3">Acheter</button>
+            </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h2>Le conquérant</h2>
-            </div>
-            <div class="card-content">
-                Ce pack contient :
-                <p>6 cartes aléatoires</p>
-            </div>
-            <button type="submit" class="card-button" name="choice" value="choice2">Acheter</button>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h2>L'invincible</h2>
-            </div>
-            <div class="card-content">
-                Ce pack contient :
-                <p>12 cartes aléatoires</p>
-            </div>
-            <button type="submit" class="card-button" name="choice" value="choice3">Acheter</button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
+
+
 
 
 <style>

@@ -4,11 +4,43 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a>
-{% endif %}
+<section class="jumbotron">
+    <div class="container">
+      <div class="row text-center">
+        <h2>Hearthstone</h2>
+        <h3>Ne perds pas une seconde et viens défier tes amis</h3>
+        <a class="btn btn-primary" href="#">Jouez maintenant</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+      <div class="flex">
+        <div class="col-sm-6">
+          <p>Gagne des pièces en jouant </p>
+          <a href="#">
+            <img src="https://searchengineland.com/figz/wp-content/seloads/2015/09/google-analytics-logo-full-1920.png">
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <p>Découvres et achètes de nouvelles cartes</p>
+          <a href="{% url 'shopping:index' %}">          
+            <img src="https://images.vice.com/motherboard/content-images/article/29624/1452824051239794.jpg?crop=1xw%3A0.84375xh%3Bcenter%2Ccenter&resize=2000%3A*">
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <p>Recherches des amis</p>
+          <a href="/user/search"">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjlAkKYL1Xjv3gdxOHj-HZO1kssCgneFzSPBVAl62barb1X05u">
+          </a>
+        </div>
+        <div class="col-sm-6">
+          <p>Participes au forum</p>
+          <a href="#">
+            <img src="https://www.synancia.com/assets/images/image03.jpg?v51631497454251">
+          </a>
+        </div>
+      </div>
+    </section>
+ 
 {% endblock %}
