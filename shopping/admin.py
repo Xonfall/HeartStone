@@ -10,4 +10,4 @@ class ShoppingAdmin(admin.ModelAdmin):
 
 
 # Register the admin class with the associated model
-# admin.site.register(Shop, ShoppingAdmin)
+#admin.site.register(Shop, ShoppingAdmin)
