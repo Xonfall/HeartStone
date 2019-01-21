@@ -25,4 +25,8 @@ urlpatterns = [
     path('cards/', include('cards.urls')),
     path('deck/', include('decks.urls')),
     path('forum/', include('forum.urls')),
+    path('profile/', include('user.urls')),
+
 ]
+
+handler404 = 'heartstone.views.error_404_view'

@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-
+from django import forms
 from user.models import User
 
 
@@ -15,3 +15,9 @@ class MyCustomUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email']

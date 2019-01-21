@@ -1,0 +1,7 @@
+<div>
+    <table >
+        {% for u in user_list %}
+            <tr><td><a href="/profile/{{ u.username }}">{{ u.username }}</a></td></tr>
+        {% endfor %}
+    </table>
+</div>

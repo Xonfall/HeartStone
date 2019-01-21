@@ -14,6 +14,16 @@
   text-align: center;
 }
 
+small {
+  color: grey;
+  font-size: 0.7rem;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 body{
     padding: 0;
     margin: 0;
@@ -22,7 +32,7 @@ body{
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: #333;
 }
 
 section.cover{
@@ -46,7 +56,7 @@ section nav{
 section nav .logo img{
   height: 74px;
 }
-section nav li a {
+section nav li a, section nav li span {
   text-decoration: none;
   color: #333;
 }
@@ -70,7 +80,7 @@ section nav ul li {
   color: #333b40;
 }
 
-section nav ul li a{
+section nav ul li a, section nav li span {
   display: inline-block;
   padding: 0 14px;
   font-size: 14px;
@@ -96,6 +106,12 @@ section nav ul li a:hover {
   background-color: transparent;
   border-color: #666;
 
+}
+
+
+section nav li span .fas{
+  margin-right: 6px;
+  font-size: 1.4em;
 }
 
 section nav ul > li:nth-last-child(2) > a:hover {
@@ -140,11 +156,18 @@ section nav ul > li:nth-last-child(2) > a {
 
 section.cover form {
   background: #fff;
-  padding: 4em 4em 2em;
+  padding: 40px 40px 40px;
   max-width: 560px;
   margin: 30px auto 0;
   border-radius: 5px;
-  font-size: 10px;
+}
+
+section.cover form a {
+  color: #d5354b;
+}
+
+section.cover form a:hover {
+  text-decoration: underline; 
 }
 
 section.cover form div {
@@ -154,7 +177,7 @@ section.cover form div {
 
 label {
 	display: block;
-	font-size: 1.6em;
+	font-size: 1em;
 	margin: 0 0 .5em;
 	color: #333;
 }
@@ -170,7 +193,7 @@ input[type="text"],
 input[type="password"], input[type="email"] {
 	background: #f5f5f5;
 	border: 1px solid #e5e5e5;
-	font-size: 1.6em;
+	font-size: 1em;
 	padding: .8em .5em;
 	border-radius: 5px;
 }
@@ -181,6 +204,7 @@ input[type="password"]:focus {
 }
 
 input[type="submit"], button[type="submit"] {
+  width: 100%;
   background: #f4364c;
   box-shadow: 0 3px 0 0 #f4364c;
   border-radius: 5px;
@@ -188,8 +212,239 @@ input[type="submit"], button[type="submit"] {
   color: #fff;
   cursor: pointer;
   display: block;
-  font-size: 1.6em;
+  font-size: 1em;
   margin: 2em 0 0;
   outline: none;
   padding: .8em 0;
 }
+
+
+
+.profile-info {
+    text-align: center;
+}
+
+.profile-card-name {
+  font-weight: 700;
+  font-size: 24px;
+  color: #6944ff;
+  margin-bottom: 15px;
+}
+
+.follow-table {
+  margin: auto;
+  width: 50%;
+}
+
+button.follow {
+  margin : 10px 0px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  text-align: center;
+  background-color: #36383f;
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
+  transition: all 0.2s ease-out 0s;
+  padding: 11px 15px;
+  outline: none;
+}
+
+button.follow {
+  background: #4e505a;
+}
+
+.followers-number, .followings-number {
+  font-size: 1.9rem;
+}
+
+.wrapper {
+    background: #fff;
+    padding: 40px 40px 40px;
+    margin: 30px auto 0;
+    border-radius: 5px;
+}
+
+#search_results a:hover {
+  color: #d5354b;
+}
+
+
+.alert {
+  padding: 15px 40px;
+  margin: 20px auto;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  display: none;
+  max-width: 560px;
+}
+
+
+/* Start 404 Error */
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:700);
+
+.text-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 6em;
+  font-weight: 700;
+  color: #EE4B5E;
+}
+
+.subtitle {
+  font-size: 40px;
+  font-weight: 700;
+  color: #1FA9D6;
+}
+
+.buttons {
+  margin: 30px;
+}
+.buttons a.button {
+  font-weight: 700;
+  border: 2px solid #EE4B5E;
+  text-decoration: none;
+  padding: 15px;
+  text-transform: uppercase;
+  color: #EE4B5E;
+  border-radius: 26px;
+  transition: all 0.2s ease-in-out;
+}
+.buttons a.button:hover {
+  background-color: #EE4B5E;
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+/* End 404 Error */
+
+
+/* Starrt Homepage */
+
+.jumbotron {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+.jumbotron .container {
+  max-width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.col-sm-6 {
+  width: calc(50% - 70px);
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+section .flex img {
+  margin: 0 0 30px;
+  width: 100%;
+}
+
+
+
+/*Start follow popup*/
+
+
+.pop {
+  display: none;
+  z-index: 99;
+  position: fixed;
+  top: 10.3%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 500px;
+  height: 300px;
+  background: #ffffff;
+  outline: 10px solid rgba(0, 0, 0, 0.1);
+}
+.pop > h1 {
+  padding: 30px 30px 10px 30px;
+  color: #2a3644;
+  font-size: 100%;
+}
+
+.pop > .pop-up-close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  font-size: 1.9rem;
+}
+
+.following-follower-list{
+  display: none;
+}
+
+.profile-popup-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+.profile-popup-list li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+}
+
+.profile-popup-list li a:hover{
+  color: #d5354b;
+}
+
+/*End follow popup*/

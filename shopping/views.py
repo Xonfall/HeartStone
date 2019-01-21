@@ -10,7 +10,7 @@ from user.models import User
 # Create your views here.
 
 def index(request):
-    return render(request, 'shopping/forum_index.html')
+    return render(request, 'shopping/index.html')
 
 
 @login_required
@@ -37,9 +37,9 @@ def buy_cards(request):
                     for card in cards:
                         Card(id=card.id).users.add(User(id=user_id))
 
-                    return render(request, 'shopping/forum_index.html')
+                    return render(request, 'shopping/index.html')
                 else:
-                    return render(request, 'shopping/forum_index.html')
+                    return render(request, 'shopping/index.html')
             elif choice == 'choice2':
                 price = 150
                 user_money = user_money - price
@@ -53,9 +53,9 @@ def buy_cards(request):
                     for card in cards:
                         Card(id=card.id).users.add(User(id=user_id))
 
-                    return render(request, 'shopping/forum_index.html')
+                    return render(request, 'shopping/index.html')
                 else:
-                    return render(request, 'shopping/forum_index.html')
+                    return render(request, 'shopping/index.html')
             elif choice == 'choice3':
                 price = 300
                 user_money = user_money - price
@@ -69,6 +69,6 @@ def buy_cards(request):
                 for card in cards:
                     Card(id=card.id).users.add(User(id=user_id))
 
-                return render(request, 'shopping/forum_index.html')
+                return render(request, 'shopping/index.html')
             else:
-                return render(request, 'shopping/forum_index.html')
+                return render(request, 'shopping/index.html')
