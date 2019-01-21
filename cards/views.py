@@ -15,10 +15,6 @@ class CardForm(ModelForm):
 
     @login_required
     def index(request):
-
-        for x in range(1, 29):
-            insert_cards = Card_user(card_id=x, user_id=request.user.id)
-            insert_cards.save()
         return render(request, 'index.html')
 
     def all(request):
