@@ -1,12 +1,12 @@
 #!/bin/bash
 
-echo "Launch migrations... PROD"
+echo "Launch migrations..."
 python manage.py makemigrations
 
 echo "Update database..."
 python manage.py migrate
 
-  python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 # Start Gunicorn processes
 echo "Starting Gunicorn..."

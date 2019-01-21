@@ -19,6 +19,10 @@ small {
   font-size: 0.7rem;
 }
 
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 body{
     padding: 0;
@@ -279,7 +283,6 @@ button.follow {
 
 /* Start 404 Error */
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:700);
 
 .text-wrapper {
   height: 100%;
@@ -387,7 +390,60 @@ section .flex img {
   width: 100%;
 }
 
-.flex {
-  display: flex;
-  flex-wrap: wrap;
+
+/*Start follow popup*/
+
+
+.pop {
+  display: none;
+  z-index: 99;
+  position: fixed;
+  top: 10.3%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 500px;
+  height: 300px;
+  background: #ffffff;
+  outline: 10px solid rgba(0, 0, 0, 0.1);
 }
+
+.pop > h1 {
+  padding: 30px 30px 10px 30px;
+  color: #2a3644;
+  font-size: 100%;
+}
+
+.pop > .pop-up-close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+  color: #000;
+  width: 30px;
+  height: 30px;
+  font-size: 1.9rem;
+}
+
+.following-follower-list {
+  display: none;
+}
+
+.profile-popup-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: hidden;
+}
+
+.profile-popup-list li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+}
+
+.profile-popup-list li a:hover {
+  color: #d5354b;
+}
+
+/*End follow popup*/

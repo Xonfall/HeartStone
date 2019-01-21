@@ -1,2 +1,0 @@
-Requirement already satisfied: django in /Library/Python/2.7/site-packages (1.11.16)
-Requirement already satisfied: pytz in /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python (from django) (2013.7)
