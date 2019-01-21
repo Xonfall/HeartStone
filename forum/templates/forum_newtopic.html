@@ -1,0 +1,20 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Create a new topic</h1>
+
+
+    {% for forum in forum_set %}
+        {% if forum.lock == False or request.user.is_superuser %}
+            <form method="post">{% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary" value="Submit">Créer mon topic</button>
+            </form>
+        {% else %}
+            This forum is locked
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

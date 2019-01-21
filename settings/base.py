@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'decks',
     'cards',
     'shopping',
+    'forum',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +67,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'heartstone.wsgi.application'
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -105,8 +107,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -114,5 +114,15 @@ STATICFILES_DIRS = [
     'static/',
 ]
 
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "kind.hackathon@gmail.com"
+EMAIL_HOST_PASSWORD = "Kind123+-*"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+

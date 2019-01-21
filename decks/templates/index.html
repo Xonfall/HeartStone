@@ -1,0 +1,18 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+
+{% block content %}
+   <h1>Voir mes decks créés</h1>
+
+
+
+
+    {% for decks in getDecks %}
+        <a href="view/{{ decks.id }}" style="color:black;">{{ decks }}</a><br>
+    {% endfor %}
+
+
+
+{% endblock %}
+

@@ -13,7 +13,7 @@
 
 <body>
         <section class="cover">
-            
+
                 <nav>
                   <div class="logo">
                       <a href="/">
@@ -24,10 +24,11 @@
                     <li><a href="/">Accueil</a></li>
                     {% if user.is_authenticated %}
                       <li><a href="#">Jouer</a></li>
-                      <li><a href="#">Mon deck</a> </li>
+                      <li><a href="{% url 'cards:my_cards'%}">Mes cartes</a></li>
+                      <li><a href="{% url 'deck:index'%}">Mon deck</a> </li>
                       <li><a href="{% url 'shopping:index' %}">Shopping</a></li>
                       <li><a href="/user/search" class="moncompte">Annuaire</a></li>
-                      
+
                     {% endif %}
 
                       <li><a href="#">Forum</a></li>
@@ -40,7 +41,7 @@
                       <li ><a class="ghost-btn" href="/user/login">Sign in</a></li>
                       <li><a class="ghost-btn" href="/user/register" >Sign up</a> </li>
                     {% endif %}
-                      
+
                   </ul>
                 </nav>
                 <div class="content">
@@ -48,6 +49,6 @@
                     {% endblock %}
                 </div>
         </section>
- 
+
 </body>
 </html>

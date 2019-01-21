@@ -16,17 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from . import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('user/', include('django.contrib.auth.urls')),
-    path('shopping/', include('shopping.urls')),
     path('cards/', include('cards.urls')),
+    path('deck/', include('decks.urls')),
+    path('forum/', include('forum.urls')),
     path('profile/', include('user.urls')),
 
 ]
