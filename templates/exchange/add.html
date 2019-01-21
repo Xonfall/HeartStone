@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if message is not None %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form action="new" method="post">
+        {% csrf_token %}
+
+        <label for="">Titre de l'annonce</label>
+        <input type="text" name="title">
+
+        <label for="">Carte à échanger</label>
+        <select name="cards" id="">
+            {% for card in own_cards %}
+                <option value="{{ card.id }}">{{ card.name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="">Carte demandé</label>
+        <select name="card_demand" id="">
+            {% for card in all_cards %}
+                <option value="{{ card.id }}">{{ card.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Valider">
+    </form>
+
+{% endblock %}
