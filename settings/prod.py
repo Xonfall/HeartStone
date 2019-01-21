@@ -4,7 +4,7 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'django.bachayani.com'
+    'django.bachayani.com',
 ]
 
 # SSL, HTTPS
