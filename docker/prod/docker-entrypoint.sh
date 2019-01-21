@@ -1,12 +1,17 @@
 #!/bin/bash
 
-echo "Launch migrations..."
+echo "Launch migrations... PROD"
 python manage.py makemigrations
 
 echo "Update database..."
 python manage.py migrate
 
-#echo "Start server..."
-#python manage.py runserver 0.0.0.0:8000
+  python manage.py collectstatic --noinput
+
+# Start Gunicorn processes
+echo "Starting Gunicorn..."
+exec gunicorn heartstone.wsgi:application \
+    --bind 0.0.0.0:8000 \
+    --workers 3
 
 exec "$@"
