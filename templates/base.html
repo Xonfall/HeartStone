@@ -24,9 +24,9 @@
                     <li><a href="/">Accueil</a></li>
                     {% if user.is_authenticated %}
                       <li><a href="#">Jouer</a></li>
-                      <li><a href="{% url 'cards:my_cards'%}">Mes cartes</a></li>
-                      <li><a href="{% url 'deck:index'%}">Mon deck</a> </li>
-                      <li><a href="{% url 'shopping:index' %}">Shopping</a></li>
+                      <li><a href="/cards">Mes cartes</a></li>
+                      <li><a href="/deck">Mon deck</a> </li>
+                      <li><a href="/shopping">Shopping</a></li>
                       <li><a href="/user/search" class="moncompte">Annuaire</a></li>
 
                     {% endif %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shopping.models import Shop
+# from shopping.models import Shop
 
 
 # Register your models here.
@@ -10,4 +10,4 @@ class ShoppingAdmin(admin.ModelAdmin):
 
 
 # Register the admin class with the associated model
-admin.site.register(Shop, ShoppingAdmin)
+# admin.site.register(Shop, ShoppingAdmin)
