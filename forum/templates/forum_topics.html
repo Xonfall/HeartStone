@@ -3,8 +3,8 @@
 
 
 {% block content %}
-    <h1>voir les topics</h1>
-
+    <h1>Voir les topics</h1>
+    <a href="{% url 'forum_index' %}" style="color:red">Retour en arrière</a>
     {% for forum in forum_set %}
         <h2>{{ forum.title }}</h2>
     {% endfor %}
@@ -12,13 +12,19 @@
         <a href="/forum/topic/{{ topic.id }}" style="color:red;">{{ topic.title }}</a>
         <hr>
         {% for topic in topic.getTopicsUser %}
-            created by  <b>{{ topic.username }}</b>
+            créé par  <b>{{ topic.username }}</b>
         {% endfor %}
 
-        Dernier message le :
-        <a href="/forum/topic/{{ topic.id }}" style="color:red">{{ topic.getLastComments.created_on }}
-            par {{ topic.getLastComments.commented_by }}</a>
-        <br>
+
+        {% if topic.getLastComments != None %}
+            Dernier message le :
+            <a href="/forum/topic/{{ topic.id }}" style="color:red">{{ topic.getLastComments.created_on }}
+                par {{ topic.getLastComments.commented_by }}</a>
+            <br>
+        {% else %}
+             Il n'y a pas de dernier message.
+            <br>
+        {% endif %}
     {% endfor %}
 
     <br><br><br><br>

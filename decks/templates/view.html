@@ -3,14 +3,17 @@
 
 
 {% block content %}
-   <h1><i style="color:#f4364c">-| {{ deck_name.name }} |-</i> </h1>
 
+    <a href="{% url 'index_deck' %}" style="color:red;">Voir mes decks</a> <br>
+
+    <h1><i style="color:#f4364c">-| {{ deck_name.name }} |-</i></h1>
 
     <h3>Cartes de mon decks : </h3>
 
     {% for decks in deck_cards %}
 
-        <img src="{{ decks.img}}" alt="" width="150px">
+
+        <img src="{{ decks.img }}" alt="" width="150px">
     {% endfor %}
 
 

@@ -62,9 +62,20 @@
 
 
     </style>
+
+     <a href="{% url 'index_deck' %}" style="color:red;">Retour en arrière</a>
+    <br><br>
     <h1>Editer mon deck</h1>
 
-
+    <div class="messages"></div>
+    <br><br>
+     {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <div class="form-group">
         {{ form.name }}
@@ -259,7 +270,7 @@
                                     'csrfmiddlewaretoken': '{{ csrf_token }}',
                                 },
                                 success: function (json) {
-                                    //console.log(json);
+                                   $('.messages').append('Le deck à correctement été edité')
 
                                 },
                             });

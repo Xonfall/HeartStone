@@ -3,8 +3,16 @@
 
 
 {% block content %}
-    <h1>voir les topics</h1>
+    <h1>Voir les messages</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     {% for topics in topic_list %}
+         <a href="javascript:history.go(-1)" style="color:red;">Retour en arrière</a>
 
         <h3>{{ topics.title|capfirst }}</h3>
         {{ topics.created_by }} {{ topics.description|safe }}<br>
@@ -16,6 +24,7 @@
         {% for topices in topics.getAllComments %}
             {{ topices.commented_by }} {{ topices.comment }}<br>
             {{ topices.created_on }}<br>
+            <hr>
         {% endfor %}
     {% endfor %}
     <br><br><br>
