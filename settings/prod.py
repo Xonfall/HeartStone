@@ -4,13 +4,13 @@ from .base import *
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'django.bachayani.com'
+    'django.bachayani.com',
 ]
 
 # SSL, HTTPS
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 
 # Database

@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.7
 
 ENV DJANGO_SETTINGS_MODULE=heartstone.settings.dev
 
@@ -13,9 +13,10 @@ RUN pip install -r requirements.txt
 # COPY project in container
 COPY . /app
 
-# Execute migrations and server
+# Execute migrations
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
-EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
+EXPOSE 8000

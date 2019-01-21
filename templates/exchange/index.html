@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <a href="new" style="color: #000;">Vendre un carte</a>
+
+    {% for card in cards %}
+
+        <div class="container">
+        <div>
+            <p>Carte demandé par {{ card.username }}</p>
+            <img src="{{ card.img }}" alt="">
+        </div>
+
+    {% endfor %}
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .item {
+        border: 1px solid black;
+        padding: 10px;
+        min-width: 50%;
+        height: 60px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+</style>
+
+{% endblock %}

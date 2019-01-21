@@ -22,11 +22,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('user/', include('django.contrib.auth.urls')),
+    path('shopping/', include('shopping.urls')),
     path('cards/', include('cards.urls')),
     path('deck/', include('decks.urls')),
     path('forum/', include('forum.urls')),
     path('profile/', include('user.urls')),
-
+    path('exchange/', include('exchange.urls')),
 ]
 
 handler404 = 'heartstone.views.error_404_view'
