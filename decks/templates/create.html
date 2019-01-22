@@ -62,9 +62,13 @@
 
 
     </style>
+
+    <a href="{% url 'index_deck' %}" style="color:red;">Retour en arrière</a>
+    <br><br>
     <h1>Créer mon deck</h1>
 
-
+    <div class="messages"></div>
+    <br><br>
 
     <div class="form-group">
         {{ form.name }}
@@ -196,8 +200,10 @@
                                     'csrfmiddlewaretoken': '{{ csrf_token }}',
                                 },
                                 success: function (json) {
-                                    console.log(json);
-
+                                    $('.messages').append('Le deck à correctement été créé');
+                                    setTimeout(function () {
+                                        window.location.href = "/deck/index_deck";
+                                    }, 2000);
                                 },
                             });
 

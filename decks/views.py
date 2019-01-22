@@ -12,15 +12,16 @@ from .forms import DecksForm
 import json
 from django.core import serializers
 import collections
+from django.contrib import messages
 
 
 @login_required
-def index(request):
+def index_deck(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
         getDecks = Deck.objects.filter(user_id=request.user)
-        return render(request, 'index.html', {'getDecks': getDecks})
+        return render(request, 'index_deck.html', {'getDecks': getDecks})
 
 
 def view(request, id):
@@ -166,5 +167,11 @@ def ajax_editDeck(request, id):
             entry = Deck.objects.get(id=id)
             inserCards = Deck_user(card_id=i['card_id'], deck_id=entry.id)
             inserCards.save()
-
     return HttpResponse('ok')
+
+
+def deck_delete(request, id):
+    messages.success(request, 'Le deck a été supprimé')
+    Deck_user.objects.filter(deck_id=id).delete()
+    Deck.objects.filter(id=id).delete()
+    return redirect('index_deck')

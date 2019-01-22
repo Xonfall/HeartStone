@@ -1,7 +1,36 @@
-<h1>Mes cartes</h1>
-{% for card in all_cards %}
+<!-- templates/home.html-->
+{% extends 'base.html' %}
 
-			    <tr>
-                    <img src="{{ card.img }}" alt="" width="150px">
-			    </tr>
-{% endfor %}
+
+{% block content %}
+
+    <h1>Mes cartes</h1>
+    {% for card in all_cards %}
+
+        <tr>
+            <img src="{{ card.img }}" alt="" width="150px">
+        </tr>
+    {% endfor %}
+{% if all_cards.has_other_pages %}
+  <ul class="pagination">
+    {% if all_cards.has_previous %}
+      <li><a href="?page={{ all_cards.previous_page_number }}" style="color:red;">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in all_cards.paginator.page_range %}
+      {% if all_cards.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}" style="color:red;">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if all_cards.has_next %}
+      <li><a href="?page={{ all_cards.next_page_number }}" style="color:red;">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+{% endblock %}

@@ -6,10 +6,11 @@ from .forms import TopicForm, PostForm
 # Create your views here.
 from forum.models import Forum, Topic, Post
 from user.models import User
+from django.contrib import messages
 
 
 def forum_index(request):
-    categories_list = Forum.objects.all()
+    categories_list = Forum.objects.all().order_by('title')
 
     return render(request, 'forum_index.html', {'queryset': categories_list})
 
@@ -40,7 +41,9 @@ def forum_comTopic(request, id):
             tamere.topic_id = id
             tamere.save()
 
-            return redirect('forum_index')
+            messages.success(request, 'Le message a correctement été posté')
+            return redirect('forum_topic', id=id)
+
     else:
         form = PostForm()
         topic_list = Topic.objects.filter(id=id)
@@ -60,7 +63,7 @@ def forum_newTopic(request, id):
             tamere.created_by_id = request.user.id
             tamere.category_id = id
             tamere.save()
-
+            messages.success(request, 'Le topic a correctement été créé')
             return redirect('forum_index')
     else:
         form = TopicForm()
@@ -70,6 +73,7 @@ def forum_newTopic(request, id):
 def forum_block(request, id):
     if request.user.is_superuser:
         Forum.objects.filter(id=id).update(lock=True)
+        messages.success(request, 'Le forum a été correctement bloqué')
         return redirect('forum_index')
     else:
         return redirect('forum_index')
@@ -78,12 +82,14 @@ def forum_unblock(request, id):
 
     if request.user.is_superuser:
         Forum.objects.filter(id=id).update(lock=False)
+        messages.success(request, 'Le forum a été correctement débloqué')
         return redirect('forum_index')
     else:
         return redirect('forum_index')
 
 def forum_deltopic(request, id):
     if request.user.is_superuser:
+        messages.success(request, 'Le topic a été correctement supprimé')
         topic_list = Topic.objects.filter(id=id)
         for pet in topic_list:
             Post.objects.filter(topic_id=pet.id).delete()

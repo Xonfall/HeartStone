@@ -9,13 +9,13 @@ from cards.models import Race_card
 from cards.models import Rarity_card
 from cards.models import Card_user
 from user.models import User
-
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 class CardForm(ModelForm):
 
     @login_required
     def index(request):
-        return render(request, 'index.html')
+        return render(request, 'index_deck.html')
 
     def all(request):
         cards_api = Cards()
@@ -74,6 +74,10 @@ def my_cards(request):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
-        relative_news = Card.objects.filter(card_user__in=Card_user.objects.filter(user_id=request.user.id))
+        cards = Card.objects.filter(card_user__in=Card_user.objects.filter(user_id=request.user.id))
+        paginator = Paginator(cards, 35)
+        page = request.GET.get('page')
+        all_cards = paginator.get_page(page)
 
-    return render(request, 'my_cards.html', {'all_cards': relative_news})
+    return render(request, 'my_cards.html', {'all_cards': all_cards, 'range': range(paginator.num_pages)})
+

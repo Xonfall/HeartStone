@@ -14,7 +14,7 @@ def index(request):
     cards = Exchange.objects.raw(
         "select exchange_exchange.id, cc.name, cc.img, uu.username, crc.name, created_at from exchange_exchange join cards_card cc on exchange_exchange.card_receiver_id = cc.id join user_user uu on exchange_exchange.user_id = uu.id join cards_rarity_card crc on cc.rarity_card_id = crc.id where exchange_statut = 'pending'")
 
-    return render(request, 'exchange/index.html', {"cards": cards})
+    return render(request, 'exchange/index_deck.html', {"cards": cards})
 
 
 @login_required
@@ -37,4 +37,4 @@ def new(request):
         query = Exchange(exchange_statut="pending", user_id=request.user.id, title=title,
                          card_sender=Card(id=id_card_sender), card_receiver=Card(id=id_card_receiver)).save()
 
-        return render(request, 'exchange/index.html', {'message': 'Votre demande a été enregistré'})
+        return render(request, 'exchange/index_deck.html', {'message': 'Votre demande a été enregistré'})

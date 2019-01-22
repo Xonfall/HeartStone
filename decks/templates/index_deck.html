@@ -3,13 +3,26 @@
 
 
 {% block content %}
-   <h1>Voir mes decks créés</h1>
 
 
 
+    <h1>Voir mes decks créés</h1>
 
+
+    <a href="{% url 'create' %}" style="color:red;">Créer un nouveau deck</a>
+    <br><br><br><br>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br><br>
     {% for decks in getDecks %}
-        <a href="view/{{ decks.id }}" style="color:black;">{{ decks }}</a><br>
+        <a href="view/{{ decks.id }}" style="color:black;">{{ decks }}</a> -
+        <a href="edit/{{ decks.id }}" style="color:red;">Editer</a> /
+        <a href="deldeck/{{ decks.id }}" style="color:red;">Supprimer</a><br>
     {% endfor %}
 
 
