@@ -6,8 +6,6 @@ python manage.py makemigrations
 echo "Update database..."
 python manage.py migrate
 
-python manage.py collectstatic --noinput
-
 # Start Gunicorn processes
 echo "Starting Gunicorn..."
 exec gunicorn heartstone.wsgi:application \
