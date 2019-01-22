@@ -11,7 +11,8 @@
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
-        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        <li
+        {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -19,23 +20,26 @@
 
     <table width="100%" border="1">
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Status</th>
             <th scope="col">Forum</th>
             <th scope="col">Nbr de message</th>
         </tr>
-        {% for forums in queryset %}
-        {% if forums.lock == 1 %}
-        <td>e forum est bloqué</td>
-        {% else %}
-        <td>Ce forum est ouvert</td>
-        {% endif %}
-        <td><a href="views/{{ forums.id }}" style="color:red;">{{ forums.title }}</a><br> {{ forums.description|safe }}
-        </td>
-        <td style="text-align:center"><b>{{ forums.getTopics|length }}</b></td>
 
+        {% for forums in queryset %}
+        <tr>
+            {% if forums.lock == 1 %}
+            <td style="color:red;">Ce forum est bloqué</td>
+            {% else %}
+            <td style="color:green;">Ce forum est ouvert</td>
+            {% endif %}
+            <td><a href="views/{{ forums.id }}" style="color:red;">{{ forums.title }}</a><br> {{ forums.description|safe
+                }}
+            </td>
+            <td style="text-align:center"><b>{{ forums.getTopics|length }}</b></td>
+        </tr>
         {% endfor %}
 
-
     </table>
+
 </div>
 {% endblock %}

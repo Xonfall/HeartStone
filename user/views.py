@@ -67,6 +67,7 @@ def show_profile(request, username, number_of_posts=2):
     if user is not None:
         followers = User.objects.filter(follow=user)
 
+        print(user)
         get_cards = Card.objects.filter(card_user__in=Card_user.objects.filter(user_id=user.id))
 
         if user.username == nowUser.username:
