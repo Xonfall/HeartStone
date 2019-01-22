@@ -118,9 +118,11 @@ def ajax_createDeck(request):
         count_cards = {k: arrayGetcountDoublon.count(k) for k in set(arrayGetcountDoublon)}
 
         for i in count_cards:
-            if i:
+            cccmoi = list(Card_user.objects.filter(card_id=i))
 
-                cccmoi = list(Card_user.objects.filter(card_id=i))
+            if count_cards[i] == 1:
+                Card_user.objects.filter(user_id=request.user.id, card_id=i).delete()
+            else:
                 for zizi in range(count_cards[i]):
                     Card_user.objects.filter(user_id=request.user.id, id=cccmoi[zizi].id).delete()
 

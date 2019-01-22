@@ -1,19 +1,17 @@
 {% extends "../base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-    <h1 class="center">Login</h1>
+<h1 class="center">Login</h1>
 
-	{% if next %}
-        error
-	{% endif %}
+{% if next %}
+error
+{% endif %}
 
-	
-	
 
-	<form role="form" class="form-horizontal" method="post" action="{% url 'login' %}">
-		{% csrf_token %}
-		{{form}}
-		<input type="submit" name="Login" >
-		<p>If you don't have account you can register <a href="{% url 'register' %}">here</a></p>
-	</form>
+<form role="form" class="form-horizontal" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Login">
+    <p>Si vous n'avez pas encore de compte, <a href="{% url 'register' %}">cliquez ici</a></p>
+</form>
 {% endblock %}

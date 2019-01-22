@@ -3,11 +3,11 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h1>Index</h1>
+<h1>Index</h1>
 
-	{% if user.is_authenticated %}
-		<h2>Your name is: {{ user.username }}</h2>
+{% if user.is_authenticated %}
+<h2>Votre pseudo est : {{ user.username }}</h2>
 
-	{% endif %}
-	
+{% endif %}
+
 {% endblock %}

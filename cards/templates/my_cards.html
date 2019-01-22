@@ -4,6 +4,16 @@
 
 {% block content %}
 
+<style>
+
+    li {
+        list-style-type: none;
+        display: inline-block;
+
+    }
+
+</style>
+<div class="wrapper">
     <h1>Mes cartes</h1>
     {% for card in all_cards %}
 
@@ -12,7 +22,7 @@
         </tr>
     {% endfor %}
 {% if all_cards.has_other_pages %}
-  <ul class="pagination">
+  <ul class="pagination" style="text-align:center;">
     {% if all_cards.has_previous %}
       <li><a href="?page={{ all_cards.previous_page_number }}" style="color:red;">&laquo;</a></li>
     {% else %}
@@ -32,5 +42,5 @@
     {% endif %}
   </ul>
 {% endif %}
-
+</div>
 {% endblock %}

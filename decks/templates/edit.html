@@ -62,7 +62,7 @@
 
 
     </style>
-
+    <div class="wrapper">
      <a href="{% url 'index_deck' %}" style="color:red;">Retour en arrière</a>
     <br><br>
     <h1>Editer mon deck</h1>
@@ -82,7 +82,7 @@
     </div>
 
 
-    <button class="validate">Edit mon deck</button>
+    <button class="btn btn-primary validate">Edit mon deck</button>
 
     <div class="form-group" style="display: none;">
         {{ form.user }}
@@ -98,7 +98,7 @@
     </div>
 
 
-
+    </div>
     <script>
         $(document).ready(function () {
             const returnNumber = function (id, array) {
@@ -252,9 +252,6 @@
                         const cards = [];
                         const countDivCards = parseInt($(".txtCards").length);
 
-                        if (countDivCards !== 30) {
-                            alert('ERROR 30 CARTES FRERES OBLIGER');
-                        } else {
 
                             $('.txtCards').each(function () {
                                 cards.push({"card_id": $(this).attr('items-id')})
@@ -271,10 +268,12 @@
                                 },
                                 success: function (json) {
                                    $('.messages').append('Le deck à correctement été edité')
+                                    setTimeout(function () {
+                                        window.location.href = "/deck/index_deck";
+                                    }, 2000);
 
                                 },
                             });
-                        }
                     });
                 },
             });

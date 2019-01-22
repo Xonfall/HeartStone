@@ -1,30 +1,30 @@
 {% extends "../base.html" %}
 {% block title %}Register{% endblock %}
 {% block content %}
-	{% if next %}
-	<p>Page interdite</p>
-	{% endif %}
+{% if next %}
+<p>Page interdite</p>
+{% endif %}
 
-  <div class="wrapper">
+<div class="wrapper">
     <h1 class="center">Register</h1>
-	
+
     <form method="post">
-      {% csrf_token %}
-      {% for field in form %}
+        {% csrf_token %}
+        {% for field in form %}
         <p>
-          {{ field.label_tag }}<br>
-          {{ field }}
-          {% if field.help_text %}
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
             <small style="color: grey">{{ field.help_text }}</small>
-          {% endif %}
-          {% for error in field.errors %}
-            <p style="color: red">{{ error }}</p>
-          {% endfor %}
+            {% endif %}
+            {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
         </p>
-      {% endfor %}
-      <input type="submit" value="Sign up">
-      <p>If you don't have already an account you can log in <a href="{% url 'login' %}">here</a></p>
+        {% endfor %}
+        <input type="submit" value="Sign up">
+        <p>Si vous avez déjà un compte, <a href="{% url 'login' %}">connectez vous en cliquant ici</a></p>
     </form>
-  </div>
-	
+</div>
+
 {% endblock %}

@@ -3,23 +3,39 @@
 
 
 {% block content %}
+
+<div class="wrapper">
     <h1>voir les forums</h1>
+
+
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
-    {% for forums in queryset %}
+
+
+    <table width="100%" border="1">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Forum</th>
+            <th scope="col">Nbr de message</th>
+        </tr>
+        {% for forums in queryset %}
         {% if forums.lock == 1 %}
-            Ce forum est bloqué
+        <td>e forum est bloqué</td>
         {% else %}
-            Ce forum est ouvert
+        <td>Ce forum est ouvert</td>
         {% endif %}
-        <a href="views/{{ forums.id }}" style="color:red;">{{ forums.title }}</a><br>
-        {{ forums.description|safe }}
-        <td><b>{{ forums.getTopics|length }}</b></td>
-        <hr>
-    {% endfor %}
+        <td><a href="views/{{ forums.id }}" style="color:red;">{{ forums.title }}</a><br> {{ forums.description|safe }}
+        </td>
+        <td style="text-align:center"><b>{{ forums.getTopics|length }}</b></td>
+
+        {% endfor %}
+
+
+    </table>
+</div>
 {% endblock %}

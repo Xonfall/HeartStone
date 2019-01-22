@@ -3,53 +3,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  </head>
+</head>
 
 
 <body>
-        <section class="cover">
+<section class="cover">
 
-                <nav>
-                  <div class="logo">
-                      <a href="/">
-                        <img src="{% static 'img/hearthstone.png' %}" alt="My image">
-                      </a>
-                  </div>
-                  <ul>
-                    <li><a href="/">Accueil</a></li>
-                    {% if user.is_authenticated %}
-                      <li><a href="#">Jouer</a></li>
-                      <li><a href="/cards">Mes cartes</a></li>
-                      <li><a href="/deck">Mon deck</a> </li>
-                      <li><a href="/shopping">Shopping</a></li>
-                      <li><a href="/user/search" class="moncompte">Annuaire</a></li>
+    <nav>
+        <div class="logo">
+            <a href="/">
+                <img src="{% static 'img/hearthstone.png' %}" alt="My image">
+            </a>
+        </div>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#">Jouer</a></li>
+            <li><a href="{% url 'my_cards' %}">Mes cartes</a></li>
+            <li><a href="{% url 'index_deck' %}">Mon deck</a></li>
+            <li><a href="/shopping/">Shopping</a></li>
+            <li><a href="/user/search" class="moncompte">Annuaire</a></li>
+            {% endif %}
 
-                    {% endif %}
+            <li><a href="/forum/">Forum</a></li>
 
-                      <li><a href="#">Forum</a></li>
+            {% if user.is_authenticated %}
+            <li><span><i class="fas fa-coins fa-1x"></i>{{ user.money }}</span></li>
+            <li><a href="/profile/{{ user.username }}" class="moncompte">Mon compte</a></li>
+            <li><a href="{% url 'logout'%}">Déco</a></li>
+            {% else %}
+            <li><a class="ghost-btn" href="/user/login">Me connecter</a></li>
+            <li><a class="ghost-btn" href="/user/register">M'inscrire</a></li>
+            {% endif %}
 
-                    {% if user.is_authenticated %}
-                      <li><span><i class="fas fa-coins fa-1x"></i>{{ user.money }}</span></li>
-                      <li><a href="/profile/{{ user.username }}" class="moncompte">Mon compte</a></li>
-                      <li><a href="{% url 'logout'%}">Logout</a></li>
-                    {% else %}
-                      <li ><a class="ghost-btn" href="/user/login">Sign in</a></li>
-                      <li><a class="ghost-btn" href="/user/register" >Sign up</a> </li>
-                    {% endif %}
-
-                  </ul>
-                </nav>
-                <div class="content">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-        </section>
+        </ul>
+    </nav>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</section>
 
 </body>
 </html>

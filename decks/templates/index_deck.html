@@ -5,11 +5,11 @@
 {% block content %}
 
 
-
+<div class="wrapper">
     <h1>Voir mes decks créés</h1>
 
 
-    <a href="{% url 'create' %}" style="color:red;">Créer un nouveau deck</a>
+    <a class="btn btn-primary" href="{% url 'create' %}">Créer un nouveau deck</a>
     <br><br><br><br>
     {% if messages %}
         <ul class="messages">
@@ -21,11 +21,11 @@
     <br><br>
     {% for decks in getDecks %}
         <a href="view/{{ decks.id }}" style="color:black;">{{ decks }}</a> -
-        <a href="edit/{{ decks.id }}" style="color:red;">Editer</a> /
-        <a href="deldeck/{{ decks.id }}" style="color:red;">Supprimer</a><br>
+        <a class="btn btn-primary" href="edit/{{ decks.id }}">Editer</a> /
+        <a class="btn btn-primary" href="deldeck/{{ decks.id }}" style="color:red;">Supprimer</a><br>
     {% endfor %}
 
-
+</div>
 
 {% endblock %}
 

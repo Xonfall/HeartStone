@@ -4,20 +4,19 @@
 
 {% block content %}
 
-    <div class="wrapper">
-        <form class="form-horizontal">
-                <h1>Search user by username</h1>
-                <br><br>
-                <input class="form-control" type="text" name="username" value="" id="s_fn"/>
-            </table>
-        </form>
+<div class="wrapper">
+    <form class="form-horizontal">
+        <h1>Chercher un utilisateur :</h1>
+        <br><br>
+        <input class="form-control" type="text" name="username" value="" id="s_fn"/>
+        </table>
+    </form>
 
-        <div id="search_results">
-            </div>
-            
+    <div id="search_results">
     </div>
-    
 
-    
-	<script type="text/javascript" src="{% static 'js/search_user.js' %}"></script>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/search_user.js' %}"></script>
 {% endblock %}

@@ -15,7 +15,7 @@ $("#edit").click(function () {
                 $('.email').text($("input[name='email']").val());
                 $('.profile-card-name').text( "@" + $("input[name='username']").val());
                 $(".alert").show();
-                $(".alert .message").text("Success! : Edited !");
+                $(".alert .message").text("Success! : Le message a bien été édité !");
                 $(".alert ").css("background-color", "#dff0d8");
                 $(".alert ").css("color", "#3c763d");
 

@@ -1,15 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
 
 <div class="wrapper">
     <h1>Boutique de cartes</h1>
     <form action="buy" method="post">
         {% csrf_token %}
         <div class="container">
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li
+                {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
             <div class="card">
                 <div class="card-header">
                     <h2>Le starteur</h2>
                 </div>
                 <div class="card-content">
+                    <b>Prix : 50 pièces</b><br>
                     Ce pack contient :
+
                     <p>3 cartes aléatoires</p>
                 </div>
                 <button type="submit" class="card-button" name="choice" value="choice1">Acheter</button>
@@ -19,7 +33,9 @@
                     <h2>Le conquérant</h2>
                 </div>
                 <div class="card-content">
+                    <b>Prix : 150 pièces</b><br>
                     Ce pack contient :
+
                     <p>6 cartes aléatoires</p>
                 </div>
                 <button type="submit" class="card-button" name="choice" value="choice2">Acheter</button>
@@ -29,7 +45,9 @@
                     <h2>L'invincible</h2>
                 </div>
                 <div class="card-content">
+                    <b>Prix : 300 pièces</b><br>
                     Ce pack contient :
+
                     <p>12 cartes aléatoires</p>
                 </div>
                 <button type="submit" class="card-button" name="choice" value="choice3">Acheter</button>
@@ -39,35 +57,4 @@
 </div>
 
 
-
-
-<style>
-    .container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .card {
-        margin: 30px;
-        padding: 10px;
-        background-color: #0984e3;
-        color: #FFF;
-        border-radius: 5px;
-        min-width: 200px;
-    }
-
-    .card-header {
-        padding-bottom: 5px;
-    }
-
-    .card-content {
-
-    }
-
-    .card-button {
-        width: 100%;
-    }
-</style>
+{% endblock %}

@@ -6,12 +6,13 @@ from django.shortcuts import render
 from cards.models import Card
 from cards.models import Card_user
 from user.models import User
+from django.contrib import messages
 
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'shopping/index_deck.html')
+    return render(request, 'shopping/index.html')
 
 
 @login_required
@@ -38,10 +39,11 @@ def buy_cards(request):
 
                     for card in cards:
                         Card_user(card_id=card.id, user_id=request.user.id).save()
-
-                    return render(request, 'shopping/index_deck.html')
+                    messages.success(request, 'Vous avez acheter le pack starter')
+                    return render(request, 'shopping/index.html')
                 else:
-                    return render(request, 'shopping/index_deck.html')
+                    messages.error(request, 'Vous n\'avez pas assez d\'argent.')
+                    return render(request, 'shopping/index.html')
             elif choice == 'choice2':
                 price = 150
                 user_money = user_money - price
@@ -55,10 +57,11 @@ def buy_cards(request):
 
                     for card in cards:
                         Card_user(card_id=card.id, user_id=request.user.id).save()
-
-                    return render(request, 'shopping/index_deck.html')
+                    messages.success(request, 'Vous avez acheter le pack conquérant')
+                    return render(request, 'shopping/index.html')
                 else:
-                    return render(request, 'shopping/index_deck.html')
+                    messages.error(request, 'Vous n\'avez pas assez d\'argent.')
+                    return render(request, 'shopping/index.html')
             elif choice == 'choice3':
                 price = 300
                 user_money = user_money - price
@@ -72,7 +75,8 @@ def buy_cards(request):
 
                 for card in cards:
                     Card_user(card_id=card.id, user_id=request.user.id).save()
-
-                return render(request, 'shopping/index_deck.html')
+                messages.success(request, 'Vous avez acheter le pack invincible')
+                return render(request, 'shopping/index.html')
             else:
-                return render(request, 'shopping/index_deck.html')
+                messages.error(request, 'Vous n\'avez pas assez d\'argent.')
+                return render(request, 'shopping/index.html')

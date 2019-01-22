@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<div class="wrapper">
     <a href="{% url 'index_deck' %}" style="color:red;">Voir mes decks</a> <br>
 
     <h1><i style="color:#f4364c">-| {{ deck_name.name }} |-</i></h1>
@@ -15,7 +16,7 @@
 
         <img src="{{ decks.img }}" alt="" width="150px">
     {% endfor %}
-
+</div>
 
 {% endblock %}
 

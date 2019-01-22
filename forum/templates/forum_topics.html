@@ -3,35 +3,55 @@
 
 
 {% block content %}
+<div class="wrapper">
     <h1>Voir les topics</h1>
     <a href="{% url 'forum_index' %}" style="color:red">Retour en arrière</a>
     {% for forum in forum_set %}
         <h2>{{ forum.title }}</h2>
     {% endfor %}
-    {% for topic in queryset %}
-        <a href="/forum/topic/{{ topic.id }}" style="color:red;">{{ topic.title }}</a>
-        <hr>
-        {% for topic in topic.getTopicsUser %}
-            créé par  <b>{{ topic.username }}</b>
-        {% endfor %}
+
+    <table width="100%" border="1">
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Créer par</th>
+                <th scope="col">Nbr de messages</th>
+                <th scope="col">Dernier message</th>
+            </tr>
+
+        {% for topic in queryset %}
+        <tr>
+                <td><a href="/forum/topic/{{ topic.id }}" style="color:red;">{{ topic.title }}</a></td>
+                {% for topic in topic.getTopicsUser %}
+                  <td>  <b><a href="/profile/{{ topic.username }}">{{ topic.username }}</a></b></td>
+                {% endfor %}
+
+                <td style="text-align:center">{{  topic.getAllComments|length  }}</td>
+
+                {% if topic.getLastComments != None %}
+
+                   <td> <a href="/forum/topic/{{ topic.id }}" style="color:red">{{ topic.getLastComments.created_on }}<br>
+                       par {{ topic.getLastComments.commented_by }}</a></td>
+                {% else %}
+        <td>Il n'y a pas de dernier message.</td>
+                {% endif %}</td>
+
+             </tr>
+
+            {% endfor %}
+
+    </table>
 
 
-        {% if topic.getLastComments != None %}
-            Dernier message le :
-            <a href="/forum/topic/{{ topic.id }}" style="color:red">{{ topic.getLastComments.created_on }}
-                par {{ topic.getLastComments.commented_by }}</a>
-            <br>
-        {% else %}
-             Il n'y a pas de dernier message.
-            <br>
-        {% endif %}
-    {% endfor %}
+
+
 
     <br><br><br><br>
 
     {% for forum in forum_set %}
         {% if forum.lock == False or request.user.is_superuser %}
-            <a href="/forum/newtopic/{{ id }}" style="color:red">Create new topic</a>
+            {% if request.user.is_authenticated %}
+                <a  class="btn btn-primary" href="/forum/newtopic/{{ id }}">Créer un topic</a>
+            {% endif %}
         {% endif %}
 
 
@@ -41,10 +61,11 @@
     {% if request.user.is_superuser %}
         {% for forum in forum_set %}
             {% if forum.lock == False %}
-                <a href="/forum/blockforum/{{ id }}" style="color:red">Bloquer le forum</a>
+                <a class="btn btn-primary" href="/forum/blockforum/{{ id }}">Bloquer le forum</a>
             {% else %}
-                <a href="/forum/unblockforum/{{ id }}" style="color:red">Debloquer le forum</a>
+                <a class="btn btn-primary" href="/forum/unblockforum/{{ id }}">Debloquer le forum</a>
             {% endif %}
         {% endfor %}
     {% endif %}
+</div>
 {% endblock %}
